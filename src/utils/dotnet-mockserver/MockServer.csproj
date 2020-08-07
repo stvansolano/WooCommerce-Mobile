@@ -16,4 +16,7 @@
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\mobileXF\eCommerce\Core.Logic\Core.Logic.csproj" />
+  </ItemGroup>
 </Project>

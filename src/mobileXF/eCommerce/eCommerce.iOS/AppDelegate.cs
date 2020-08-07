@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Prism.Ioc;
 using UIKit;
 
 namespace eCommerce.iOS
@@ -11,7 +12,7 @@ namespace eCommerce.iOS
 	// User Interface of the application, as well as listening (and optionally responding) to 
 	// application events from iOS.
 	[Register("AppDelegate")]
-	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+	public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate, Prism.IPlatformInitializer
 	{
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this 
@@ -23,9 +24,13 @@ namespace eCommerce.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init();
-			LoadApplication(new App());
+			LoadApplication(new App(this));
 
 			return base.FinishedLaunching(app, options);
+		}
+
+		public void RegisterTypes(IContainerRegistry containerRegistry)
+		{
 		}
 	}
 }
