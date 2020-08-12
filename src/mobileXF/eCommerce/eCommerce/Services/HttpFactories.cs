@@ -12,28 +12,40 @@ namespace eCommerce.Services
     {
         string BaseUrl { get; set; }
 
-        Task<HttpResponse<T>> GetAsync<RequestType>(string endpointName, HttpRequest<RequestType> request)
-            where RequestType : class, new();
-
+        Task<HttpResponse<T[]>> GetAsync(string endpointName, HttpRequest request);
     }
 
     public class HttpFactory<T> : IHttpFactory<T>
-		where T: class, new()
+        where T : class, new()
     {
         public string BaseUrl { get; set; }
 
-        public virtual Task<HttpResponse<T>> GetAsync<RequestType>(string endpointName, HttpRequest<RequestType> request)
-            where RequestType : class, new()
+        public virtual async Task<HttpResponse<T[]>> GetAsync(string endpointName, HttpRequest request)
         {
-            return null;
-		}
+            try
+            {
+                using (var client = GetClient(GetUrl(endpointName)))
+				{
+					var response = await client.GetStringAsync(string.Empty).ConfigureAwait(false);
+                    return new HttpResponse<T[]>(JsonConvert.DeserializeObject<T[]>(response));
+                }
+            }
+            catch (Exception ex)
+            {
+				//if (!string.IsNullOrEmpty(apex.Response))
+				//{
+				//    apex.ObjectResponse = JsonConvert.DeserializeObject<CSResponse>(apex.Response);
+				//}
+                return new HttpResponse<T[]>(Array.Empty<T>(), HttpStatusCode.InternalServerError, ex);
+            }
+        }
 
-		public virtual HttpClient GetClient()
+		protected HttpClient GetClient(string url = null)
         {
             var client = new HttpClient();
-            if (!string.IsNullOrEmpty(BaseUrl))
+            if (!string.IsNullOrEmpty(url ?? BaseUrl))
             {
-                client.BaseAddress = new Uri($"{BaseUrl}/");
+                client.BaseAddress = new Uri($"{url ?? BaseUrl}");
             }
 
             return client;
@@ -68,35 +80,17 @@ namespace eCommerce.Services
 	public class MockHttpFactory<T> : HttpFactory<T>
         where T : class, new()
     {
-        protected override string GetUrl(string SERVICE_URL)
+        protected override string GetUrl(string endpointName)
         {
-            const string TEMP_MOCK_URL = "https://44595e64cbd9.ngrok.io/api/MockServer";
+            const string API_SEGMENT = "/wp-json/wc/v3";
 
-            return TEMP_MOCK_URL + $"?url={WebUtility.UrlEncode(SERVICE_URL)}";
-        }
+            const string TEMP_MOCK_URL = App.Constants.UrlEndpoint;
+            // http://localhost:7071/api/MockServer?url=/wp-json/wc/v3/products
 
+            var encoded = WebUtility.UrlEncode(API_SEGMENT + endpointName);
+            var result = TEMP_MOCK_URL + $"/api/MockServer?url={encoded}";
 
-        public override async Task<HttpResponse<T>> GetAsync<RequestType>(string endpointName, HttpRequest<RequestType> request)
-        {
-            try
-            {
-                var url = GetUrl(endpointName);
-
-                var client = GetClient();
-
-                var response = await client.GetStringAsync(endpointName).ConfigureAwait(false);
-
-                //HandleResponse(Response, AuthBehavior.NoAuth, out String ResponseString);
-                return new HttpResponse<T>(JsonConvert.DeserializeObject<T>(response));
-            }
-            catch (Exception ex)
-            {
-                //if (!string.IsNullOrEmpty(apex.Response))
-                //{
-                //    apex.ObjectResponse = JsonConvert.DeserializeObject<CSResponse>(apex.Response);
-                //}
-                throw ex;
-            }
+            return result;
         }
     }
 }

@@ -4,31 +4,27 @@ using eCommerce.Services;
 using Prism.Ioc;
 using Prism.Navigation;
 
-
-using WooCommerceNET;
 using WooCommerceNET.WooCommerce.v3;
 
 namespace eCommerce
 {
 	public class MainPageViewModel : Prism.Mvvm.BindableBase, IInitialize, IInitializeAsync
 	{
-		public MainPageViewModel(IHttpFactory<Product> dependencyService)
+		public MainPageViewModel(IContainerProvider dependencyProvider)
 		{
-			Factory = dependencyService;
+			Factory = dependencyProvider.Resolve<IHttpFactory<Product>>();
 		}
 
 		public IHttpFactory<Product> Factory { get; }
 
-		public void Initialize(INavigationParameters parameters)
-		{
-		}
+		public void Initialize(INavigationParameters parameters) { }
 
 		public async Task InitializeAsync(INavigationParameters parameters)
 		{
-			Factory.BaseUrl = "https://6ed5bcbfc3a9.ngrok.io/api/";
-			var result = await Factory.GetAsync("/products", new HttpRequest<Product>());
+			Factory.BaseUrl = App.Constants.UrlEndpoint;
 
-			Console.WriteLine(result);
+			var result = await Factory.GetAsync("/products", new HttpRequest());
+			Console.WriteLine($"Results: {(result?.Result ?? new Product[0]).Length}");
 		}
 	}
 }

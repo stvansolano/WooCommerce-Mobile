@@ -8,15 +8,18 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net;
+using WooCommerce;
+using WooCommerceNET.WooCommerce.v3;
+using System.Collections.Generic;
 
 namespace MockServer
 {
-	// ./ngrok http 7071 --host-header=localhost:7071
+	// ./ngrok http 0.0.0.0:7071
 	public static class MockServer
 	{
 		[FunctionName("MockServer")]
 		public static async Task<IActionResult> Run(
-			[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
+			[HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "")] HttpRequest req,
 			ILogger log)
 		{
 			log.LogInformation("C# HTTP trigger function processed a request.");
@@ -30,7 +33,55 @@ namespace MockServer
 			Console.WriteLine("URL {0}", url);
 			Console.WriteLine("Body {0}" + Environment.NewLine, data);
 
-			var response = new CustomStatusCodeResult(HttpStatusCode.NotFound,
+			if (url.EndsWith("/wp-json/wc/v3/products"))
+			{
+				return new CustomStatusCodeResult(HttpStatusCode.OK,
+					new [] {
+						new Product {
+							id = 1,
+							name = "Product 1",
+							description = "description",
+							short_description = "short description",
+							sale_price = 100,
+							categories = new List<ProductCategoryLine>   {
+								new ProductCategoryLine {
+								 id = 1,
+								 name = "category 1",
+								 slug = "slug"
+								}
+							}
+						},
+						new Product {
+							id = 1,
+							name = "Product 2",
+							description = "description",
+							short_description = "short description",
+							sale_price = 100,
+							categories = new List<ProductCategoryLine>   {
+								new ProductCategoryLine {
+								 id = 1,
+								 name = "category 1",
+								 slug = "slug"
+								}
+							}
+						},
+						new Product {
+							id = 1,
+							name = "Product 3",
+							description = "description",
+							short_description = "short description",
+							sale_price = 100,
+							categories = new List<ProductCategoryLine>   {
+								new ProductCategoryLine {
+								 id = 1,
+								 name = "category 1",
+								 slug = "slug"
+								}
+							}
+						}
+					});
+			}
+			var response = new CustomStatusCodeResult(HttpStatusCode.OK,
 				new
 				{
 					Success = true,

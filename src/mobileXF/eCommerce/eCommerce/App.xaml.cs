@@ -3,18 +3,20 @@ using eCommerce.Services;
 using Prism;
 using Prism.Ioc;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-using WooCommerceNET;
 using WooCommerceNET.WooCommerce.v3;
 
 namespace eCommerce
 {
 	public partial class App
 	{
-		public App(IPlatformInitializer initializer = null) : base(initializer)
+		internal class Constants
 		{
+			// ./ngrok 0.0.0.0:7071
+			public const string UrlEndpoint = "https://9bc23ef03c98.ngrok.io"; // "without /"
 		}
+
+		public App(IPlatformInitializer initializer = null) : base(initializer) {}
 
 		protected override async void OnInitialized()
 		{
@@ -65,11 +67,14 @@ namespace eCommerce
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
+			containerRegistry.RegisterInstance(Container);
+
 			//containerRegistry.Register<ILoggerFacade, Services.DebugLogger>();
 			containerRegistry.RegisterSingleton<IHttpFactory<Product>, MockHttpFactory<Product>>();
 
 			containerRegistry.RegisterForNavigation<NavigationPage>();
-			containerRegistry.RegisterForNavigation<MainPage>();
+			containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+
 		}
 	}
 }

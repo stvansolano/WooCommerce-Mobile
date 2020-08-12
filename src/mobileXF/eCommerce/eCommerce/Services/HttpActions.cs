@@ -1,16 +1,23 @@
-﻿namespace eCommerce.Services
+﻿using System;
+using System.Net;
+
+namespace eCommerce.Services
 {
-	public class HttpRequest<T>
-		where T : class, new()
+	public class HttpRequest
 	{
 	}
 
 	public class HttpResponse<T>
-		where T : class, new()
 	{
-		public HttpResponse(T instance)
+		public HttpResponse(T instance, HttpStatusCode statusCode = HttpStatusCode.OK, Exception ex = null)
 		{
-
+			Result = instance;
+			StatusCode = statusCode;
+			Exception = ex;
 		}
+
+		public T Result { get; }
+		public HttpStatusCode StatusCode { get; }
+		public Exception Exception { get; }
 	}
 }
