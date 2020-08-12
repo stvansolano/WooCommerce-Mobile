@@ -1,10 +1,12 @@
 ﻿using System;
-using eCommerce.Services;
 using Prism;
 using Prism.Ioc;
 using Xamarin.Forms;
 
 using WooCommerceNET.WooCommerce.v3;
+using eCommerce.Mocks;
+using System.Diagnostics;
+using eCommerce.Core.Http;
 
 namespace eCommerce
 {
@@ -13,7 +15,7 @@ namespace eCommerce
 		internal class Constants
 		{
 			// ./ngrok 0.0.0.0:7071
-			public const string UrlEndpoint = "https://9bc23ef03c98.ngrok.io"; // "without /"
+			public const string UrlEndpoint = "https://aa146b16c29d.ngrok.io"; // "without /"
 		}
 
 		public App(IPlatformInitializer initializer = null) : base(initializer) {}
@@ -33,7 +35,7 @@ namespace eCommerce
 			}
 			catch (Exception ex)
 			{
-
+				Debug.WriteLine(ex);
 			}
 		}
 
@@ -70,7 +72,11 @@ namespace eCommerce
 			containerRegistry.RegisterInstance(Container);
 
 			//containerRegistry.Register<ILoggerFacade, Services.DebugLogger>();
-			containerRegistry.RegisterSingleton<IHttpFactory<Product>, MockHttpFactory<Product>>();
+			containerRegistry.RegisterInstance<IHttpFactory<Product>>(
+															new MockHttpFactory<Product>("/products")
+															);
+
+			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, MockHttpFactory<ProductCategory>>();
 
 			containerRegistry.RegisterForNavigation<NavigationPage>();
 			containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();

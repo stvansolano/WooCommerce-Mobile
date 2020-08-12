@@ -33,6 +33,10 @@ namespace MockServer
 			Console.WriteLine("URL {0}", url);
 			Console.WriteLine("Body {0}" + Environment.NewLine, data);
 
+			if (url.EndsWith("/wp-json/wc/v3/products/categories"))
+			{
+				return await FromFile("Categories.json");
+			}
 			if (url.EndsWith("/wp-json/wc/v3/products"))
 			{
 				return new CustomStatusCodeResult(HttpStatusCode.OK,
@@ -89,6 +93,15 @@ namespace MockServer
 				});
 
 			return response;
+		}
+
+		private static async Task<IActionResult> FromFile(string fileName)
+		{
+			var jsonContents = await WooCommerce.JsonMocks.Resources.GetContentAsync(fileName);
+
+			var result = new CustomStatusCodeResult(HttpStatusCode.OK, jsonContents);
+
+			return result;
 		}
 	}
 

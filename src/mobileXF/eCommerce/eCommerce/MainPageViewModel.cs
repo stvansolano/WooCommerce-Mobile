@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using eCommerce.Services;
+using eCommerce.Core.Http;
 using Prism.Ioc;
 using Prism.Navigation;
 
@@ -12,19 +12,28 @@ namespace eCommerce
 	{
 		public MainPageViewModel(IContainerProvider dependencyProvider)
 		{
-			Factory = dependencyProvider.Resolve<IHttpFactory<Product>>();
+			Products = dependencyProvider.Resolve<IHttpFactory<Product>>();
+
+			Categories = dependencyProvider.Resolve<IHttpFactory<ProductCategory>>();
 		}
 
-		public IHttpFactory<Product> Factory { get; }
+		public IHttpFactory<Product> Products { get; }
+
+		public IHttpFactory<ProductCategory> Categories { get; }
 
 		public void Initialize(INavigationParameters parameters) { }
 
 		public async Task InitializeAsync(INavigationParameters parameters)
 		{
-			Factory.BaseUrl = App.Constants.UrlEndpoint;
+			Products.BaseUrl = App.Constants.UrlEndpoint;
 
-			var result = await Factory.GetAsync("/products", new HttpRequest());
+			var result = await Products.GetAsync();
 			Console.WriteLine($"Results: {(result?.Result ?? new Product[0]).Length}");
+
+			var categories = await Categories.GetAsync("/products/categories");
+
+			Console.WriteLine($"Products: {(result?.Result ?? new Product[0]).Length}");
+			Console.WriteLine($"Categories: {(categories?.Result ?? new ProductCategory[0]).Length}");
 		}
 	}
 }

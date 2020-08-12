@@ -23,5 +23,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="Services\WooCommerce\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Logic\Core.Logic.csproj" />
   </ItemGroup>
 </Project>
