@@ -5,6 +5,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:controls="clr-namespace:eCommerce.Controls"
+             xmlns:mainScreen="clr-namespace:eCommerce.Views.MainScreen"
              xmlns:pancakes="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
              >
@@ -14,7 +16,6 @@
     -->
 
     <Grid BackgroundColor="{StaticResource color_black}">
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -34,58 +35,60 @@
                 <Button Grid.Row="0" x:Name="MenuBarIcon" Text="equalizer2" Style="{StaticResource menu_button}" HorizontalOptions="End" />
 
                 <Grid Grid.Row="1">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <controls:CarouselIndicatorView Grid.Row="0"
+                                            Items="{Binding TabItems}"
+                                            BackgroundColor="{DynamicResource mainBackground}"
+                                            CurrentItem="{Binding Item, Mode=TwoWay}"/>
                     
-                    <CollectionView x:Name="ProductOverview"
-                                    ItemsSource="{Binding Products}"
-                                    VerticalScrollBarVisibility="Never"
-                                    SelectionMode="Single"
-                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ProductOverview}}"
-                                    SelectionChangedCommand="{Binding SelectedItemCommand}">
+                      <StackLayout Grid.Row="1">
+                        <CarouselView ItemsSource="{Binding TabItems}"
+                                      CurrentItem="{Binding Item, Mode=TwoWay}"
+                                      VerticalScrollBarVisibility="Never"
+                                      HorizontalScrollBarVisibility="Never">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <ScrollView Padding="0, 20, 0, 0">
+                                        <FlexLayout BindableLayout.ItemsSource="{Binding Items}"
+                                                    Direction="Column"
+                                                    Wrap="NoWrap">
+                                            <BindableLayout.ItemTemplateSelector>
+                                                <mainScreen:TabTemplateSelector>
+                                                    <mainScreen:TabTemplateSelector.CategoryTemplate>
+                                                        <DataTemplate>
+                                                            <Label Text="{Binding}" Background="Blue" />
+                                                        </DataTemplate>
+                                                    </mainScreen:TabTemplateSelector.CategoryTemplate>
+                                                    <mainScreen:TabTemplateSelector.TagTemplate>
+                                                        <DataTemplate>
+                                                            <Label Text="{Binding}" Background="Red" />
+                                                        </DataTemplate>
+                                                    </mainScreen:TabTemplateSelector.TagTemplate>
+                                                    <mainScreen:TabTemplateSelector.PopularTemplate>
+                                                        <DataTemplate>
+                                                            <Label Text="{Binding}" Background="Yellow" />
+                                                        </DataTemplate>
+                                                    </mainScreen:TabTemplateSelector.PopularTemplate>
+                                                    <mainScreen:TabTemplateSelector.SearchTemplate>
+                                                        <DataTemplate>
+                                                            <Label Text="{Binding}" Background="Gray" />
+                                                        </DataTemplate>
+                                                    </mainScreen:TabTemplateSelector.SearchTemplate>
+                                                </mainScreen:TabTemplateSelector>
+                                            </BindableLayout.ItemTemplateSelector>
+                                        </FlexLayout>
+                                    </ScrollView>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                    </StackLayout>
 
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical" Span="2"
-                                VerticalItemSpacing="20"
-                                HorizontalItemSpacing="20" />
-                        </CollectionView.ItemsLayout>
-
-                        <CollectionView.Header>
-                            <RefreshView IsRefreshing="True"
-                                 HeightRequest="50" WidthRequest="50"
-                                 Command="{Binding RefreshCommand}"
-                                 BackgroundColor="Black" RefreshColor="Blue" />
-                        </CollectionView.Header>
-
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <pancakes:PancakeView Style="{StaticResource product_card}"
-                                                          HeightRequest="200">
-                                        <StackLayout>
-
-                                            <Image Source="{Binding images[0].src}"
-                                                   HorizontalOptions="Center" />
-                                            <!--
-                                            sharedTransitions:Transition.Name="itemTransition"
-                                                   sharedTransitions:Transition.Group="{Binding Name}"
-                                                   
-                                            -->
-                                            <Label Style="{StaticResource product_card_price}"
-                                                   Text="{Binding Price, StringFormat='{0:c}' }" />
-
-                                            <Label Style="{StaticResource product_card_name}"
-                                                   Text="{Binding name}" />
-
-                                            <Label Style="{StaticResource product_card_weight}"
-                                                   Text="{Binding WeightInGrams, StringFormat='{0}g'}" />
-
-                                        </StackLayout>
-                                    </pancakes:PancakeView>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-
-                    </CollectionView>
-
+                    
                     <pancakes:PancakeView x:Name="TopGradient" HeightRequest="32" VerticalOptions="Start"
                                         InputTransparent="True" BackgroundGradientStartColor="{StaticResource color_crema}"
                                         BackgroundGradientEndColor="Transparent" />

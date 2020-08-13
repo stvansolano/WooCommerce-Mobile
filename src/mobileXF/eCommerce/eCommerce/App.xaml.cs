@@ -33,9 +33,8 @@ namespace eCommerce
 
 			containerRegistry.RegisterForNavigation<NavigationPage>();
 
-			containerRegistry.RegisterForNavigation<ShoppingCartPage>();
 			containerRegistry.RegisterForNavigation<ProductDetailPage, ProductDetailViewModel>("ProductDetail");
-			containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+			containerRegistry.RegisterForNavigation<MainPage, MainViewModel>();
 		}
 
 		protected override async void OnInitialized()

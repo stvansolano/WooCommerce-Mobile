@@ -133,4 +133,12 @@
       <Name>eCommerce</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\FontAwesome5BrandsRegular.otf" />
+    <BundleResource Include="Resources\FontAwesome5Regular.otf" />
+    <BundleResource Include="Resources\FontAwesome5Solid.otf" />
+    <BundleResource Include="Resources\InterBold.ttf" />
+    <BundleResource Include="Resources\InterLight.ttf" />
+    <BundleResource Include="Resources\InterMedium.ttf" />
+  </ItemGroup>
 </Project>

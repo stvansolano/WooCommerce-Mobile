@@ -7,7 +7,7 @@ Credits to: @sthewissen
 Link: https://github.com/sthewissen/FocusOnXamarin/blob/master/FocusOnXamarin/App.xaml
 -->
             <!--Colors-->
-            <Color x:Key="color_crema">#F7F5F0</Color>
+            <Color x:Key="color_crema">White</Color>
             <Color x:Key="color_yellow">#F4C560</Color>
             <Color x:Key="color_white">#FFFFFF</Color>
             <Color x:Key="color_black">DarkBlue</Color>

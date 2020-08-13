@@ -33,6 +33,8 @@
     <Folder Include="Styles\" />
     <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Controls\" />
+    <Folder Include="Views\MainScreen\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Logic\Core.Logic.csproj" />

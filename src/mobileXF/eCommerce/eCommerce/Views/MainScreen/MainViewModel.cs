@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using eCommerce.Core.Http;
+using eCommerce.Views.MainScreen;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Navigation;
@@ -12,21 +14,58 @@ using WooCommerceNET.WooCommerce.v3;
 
 namespace eCommerce
 {
-	public class MainPageViewModel : Prism.Mvvm.BindableBase, IInitialize, IInitializeAsync, INavigationAware
+	public class MainViewModel : Prism.Mvvm.BindableBase, IInitialize, IInitializeAsync, INavigationAware
 	{
 		public ICommand RefreshCommand { get; set; }
 		public ICommand SelectedItemCommand { get; set; }
 		public ObservableCollection<Product> Products { get; set; } = new ObservableCollection<Product>();
 
-		public MainPageViewModel(IContainerProvider dependencyProvider, INavigationService navigationService)
+		private Tab _item;
+		public Tab Item
+		{
+			get => _item;
+			set
+			{
+				_item = value;
+				RaisePropertyChanged(nameof(Item));
+			}
+		}
+
+		public ObservableCollection<Tab> TabItems { get; set; } = new ObservableCollection<Tab>
+			{
+				new AllItemsTab
+				{
+					Title="All",
+					Selected = true,
+					Id = "A"
+				},
+				 new AllTagsTab
+				{
+					Title="Featured",
+					Id = "F"
+
+				},
+				new PopularTab
+				{
+					Id = "P"
+				},
+				new SearchTab
+				{
+					Id = "T"
+				}
+			};
+
+
+		public MainViewModel(IContainerProvider dependencyProvider, INavigationService navigationService)
 		{
 			NavigationService = navigationService;
 			ProductService = dependencyProvider.Resolve<IHttpFactory<Product>>();
 
 			CategoryService = dependencyProvider.Resolve<IHttpFactory<ProductCategory>>();
 
-			RefreshCommand = new DelegateCommand(async() => await RefreshDataAsync());
-			SelectedItemCommand = new DelegateCommand<Product>(async selectedItem => {
+			RefreshCommand = new DelegateCommand(async () => await RefreshDataAsync());
+			SelectedItemCommand = new DelegateCommand<Product>(async selectedItem =>
+			{
 				var parameters = new NavigationParameters();
 				parameters.Add("Product", selectedItem);
 

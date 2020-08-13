@@ -6,24 +6,24 @@ using Xamarin.Forms;
 
 namespace eCommerce.Views
 {
-	public partial class MainView
-	{
-		private double _height;
-		private bool _isCartVisible;
+    public partial class MainView
+    {
+        private double _height;
+        private bool _isCartVisible;
 
-		public MainView()
-		{
-			InitializeComponent();
+        public MainView()
+        {
+            InitializeComponent();
 
             GridRow2.GestureRecognizers.Add(new SwipeGestureRecognizer { Direction = SwipeDirection.Up,
                 Command = new Command(async () => await SwipeGestureRecognizer_SwipedUp()) });
             GridRow2.GestureRecognizers.Add(new SwipeGestureRecognizer { Direction = SwipeDirection.Down,
-				Command = new Command(async () => await SwipeGestureRecognizer_SwipedDown())
+                Command = new Command(async () => await SwipeGestureRecognizer_SwipedDown())
             });
 
             _height = (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Height / Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Density) - 80;
 
-            ProductOverview.SelectionChanged += ProductOverview_SelectionChanged;
+            //ProductOverview.SelectionChanged += ProductOverview_SelectionChanged;
         }
 
         async Task SwipeGestureRecognizer_SwipedUp()
@@ -86,21 +86,6 @@ namespace eCommerce.Views
                 TopGradient.FadeTo(1, easing: Easing.CubicInOut),
                 CartSmall.FadeTo(1, easing: Easing.CubicInOut)
             );
-        }
-
-        void ProductOverview_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.CurrentSelection.Any())
-            {
-                // Reset selection
-                ProductOverview.SelectedItem = null;
-
-                // Get the item we're opening.
-                var tappedItemData = e.CurrentSelection.FirstOrDefault() as Product;
-
-                // This is required in order to pass the views to animate
-                SharedTransitionNavigationPage.SetTransitionSelectedGroup(Parent as Page, tappedItemData.name);
-            }
         }
     }
 }
