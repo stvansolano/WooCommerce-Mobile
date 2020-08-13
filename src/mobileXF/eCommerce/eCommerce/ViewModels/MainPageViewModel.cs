@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using eCommerce.Core.Http;
@@ -38,8 +39,19 @@ namespace eCommerce
 			var store = await ProductService.GetAsync();
 
 			Products.Clear();
+
 			foreach (Product item in store.Result)
 			{
+#if USE_MOCKS
+				if (item.images == null || item.images.Any() == false)
+				{
+					item.images = new System.Collections.Generic.List<ProductImage>();
+					item.images.Add(new ProductImage
+					{
+						src = "https://static.ah.nl/image-optimization/static/product/AHI_43545239353939383432_1_LowRes_JPG.JPG?options=399,q85"
+					});
+				}
+#endif
 				Products.Add(item);
 			}
 

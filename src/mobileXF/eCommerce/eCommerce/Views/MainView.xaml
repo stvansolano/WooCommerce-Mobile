@@ -58,10 +58,11 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout>
-                                    <pancakes:PancakeView Style="{StaticResource product_card}" >
+                                    <pancakes:PancakeView Style="{StaticResource product_card}"
+                                                          HeightRequest="200">
                                         <StackLayout>
 
-                                            <Image Source="{Binding ImageUrl}"
+                                            <Image Source="{Binding images[0].src}"
                                                    HorizontalOptions="Center" />
                                             <!--
                                             sharedTransitions:Transition.Name="itemTransition"

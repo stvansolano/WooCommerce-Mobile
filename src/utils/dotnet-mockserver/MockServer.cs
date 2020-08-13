@@ -39,51 +39,7 @@ namespace MockServer
 			}
 			if (url.EndsWith("/wp-json/wc/v3/products"))
 			{
-				return new CustomStatusCodeResult(HttpStatusCode.OK,
-					new [] {
-						new Product {
-							id = 1,
-							name = "Product 1",
-							description = "description",
-							short_description = "short description",
-							sale_price = 100,
-							categories = new List<ProductCategoryLine>   {
-								new ProductCategoryLine {
-								 id = 1,
-								 name = "category 1",
-								 slug = "slug"
-								}
-							}
-						},
-						new Product {
-							id = 1,
-							name = "Product 2",
-							description = "description",
-							short_description = "short description",
-							sale_price = 100,
-							categories = new List<ProductCategoryLine>   {
-								new ProductCategoryLine {
-								 id = 1,
-								 name = "category 1",
-								 slug = "slug"
-								}
-							}
-						},
-						new Product {
-							id = 1,
-							name = "Product 3",
-							description = "description",
-							short_description = "short description",
-							sale_price = 100,
-							categories = new List<ProductCategoryLine>   {
-								new ProductCategoryLine {
-								 id = 1,
-								 name = "category 1",
-								 slug = "slug"
-								}
-							}
-						}
-					});
+				return await FromFile("Products.json");
 			}
 			var response = new CustomStatusCodeResult(HttpStatusCode.OK,
 				new
