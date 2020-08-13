@@ -7,6 +7,8 @@ using WooCommerceNET.WooCommerce.v3;
 using eCommerce.Mocks;
 using System.Diagnostics;
 using eCommerce.Core.Http;
+using eCommerce.Views;
+using eCommerce.ViewModels;
 
 namespace eCommerce
 {
@@ -15,10 +17,26 @@ namespace eCommerce
 		internal class Constants
 		{
 			// ./ngrok 0.0.0.0:7071
-			public const string UrlEndpoint = "https://aa146b16c29d.ngrok.io"; // "without /"
+			public const string UrlEndpoint = "https://835b1bee481e.ngrok.io"; // "without /"
 		}
 
-		public App(IPlatformInitializer initializer = null) : base(initializer) {}
+		protected override void RegisterTypes(IContainerRegistry containerRegistry)
+		{
+			containerRegistry.RegisterInstance(Container);
+
+			//containerRegistry.Register<ILoggerFacade, Services.DebugLogger>();
+			containerRegistry.RegisterInstance<IHttpFactory<Product>>(
+															new MockHttpFactory<Product>("/products")
+															);
+
+			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, MockHttpFactory<ProductCategory>>();
+
+			containerRegistry.RegisterForNavigation<NavigationPage>();
+
+			containerRegistry.RegisterForNavigation<ShoppingCartPage>();
+			containerRegistry.RegisterForNavigation<ProductDetailPage, ProductDetailViewModel>("ProductDetail");
+			containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+		}
 
 		protected override async void OnInitialized()
 		{
@@ -26,7 +44,7 @@ namespace eCommerce
 			{
 				InitializeComponent();
 
-				var result = await NavigationService.NavigateAsync("MainPage");
+				var result = await NavigationService.NavigateAsync("NavigationPage/MainPage");
 
 				if (!result.Success)
 				{
@@ -65,22 +83,6 @@ namespace eCommerce
 			{
 				Content = layout
 			};
-		}
-
-		protected override void RegisterTypes(IContainerRegistry containerRegistry)
-		{
-			containerRegistry.RegisterInstance(Container);
-
-			//containerRegistry.Register<ILoggerFacade, Services.DebugLogger>();
-			containerRegistry.RegisterInstance<IHttpFactory<Product>>(
-															new MockHttpFactory<Product>("/products")
-															);
-
-			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, MockHttpFactory<ProductCategory>>();
-
-			containerRegistry.RegisterForNavigation<NavigationPage>();
-			containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
-
 		}
 	}
 }
