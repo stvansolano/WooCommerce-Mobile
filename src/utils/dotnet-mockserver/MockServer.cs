@@ -8,9 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net;
-using WooCommerce;
-using WooCommerceNET.WooCommerce.v3;
-using System.Collections.Generic;
 
 namespace MockServer
 {
@@ -36,6 +33,10 @@ namespace MockServer
 			if (url.EndsWith("/wp-json/wc/v3/products/categories"))
 			{
 				return await FromFile("Categories.json");
+			}
+			if (url.EndsWith("/wp-json/wc/v3/products/tags"))
+			{
+				return await FromFile("Tags.json");
 			}
 			if (url.EndsWith("/wp-json/wc/v3/products"))
 			{

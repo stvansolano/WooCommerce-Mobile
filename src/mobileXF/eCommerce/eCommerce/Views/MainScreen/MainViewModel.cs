@@ -37,12 +37,14 @@ namespace eCommerce
 		public AllTagsTab AllTags { get; }
 		public SearchTab Search { get; }
 		public ObservableCollection<Tab> TabItems { get; private set; } = new ObservableCollection<Tab>();
+		public IHttpFactory<ProductTag> TagsService { get; private set; }
 
 		public MainViewModel(IContainerProvider dependencyProvider, INavigationService navigationService)
 		{
 			NavigationService = navigationService;
 
 			CategoryService = dependencyProvider.Resolve<IHttpFactory<ProductCategory>>();
+			TagsService = dependencyProvider.Resolve<IHttpFactory<ProductTag>>();
 
 			RefreshCommand = new DelegateCommand(async () => await RefreshDataAsync());
 
@@ -54,6 +56,12 @@ namespace eCommerce
 
 		private async Task RefreshDataAsync()
 		{
+			await RefreshCategories();
+			await RefreshTags();
+		}
+
+		private async Task RefreshCategories()
+		{
 			var categories = await CategoryService.GetAsync("/products/categories");
 			Console.WriteLine($"Categories: {(categories?.Result ?? new ProductCategory[0]).Length}");
 
@@ -64,6 +72,21 @@ namespace eCommerce
 				var navigableItem = new NavigationItemViewModel(item, NavigationService);
 
 				AllItems.Items.Add(navigableItem);
+			}
+		}
+
+		private async Task RefreshTags()
+		{
+			var tags = await TagsService.GetAsync();
+			Console.WriteLine($"Tags: {(tags?.Result ?? new ProductTag[0]).Length}");
+
+			AllTags.Items.Clear();
+
+			foreach (var item in tags.Result)
+			{
+				var navigableItem = new NavigationItemViewModel(item, NavigationService);
+
+				AllTags.Items.Add(navigableItem);
 			}
 		}
 

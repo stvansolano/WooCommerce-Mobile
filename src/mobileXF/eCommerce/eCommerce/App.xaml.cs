@@ -29,6 +29,10 @@ namespace eCommerce
 															new MockHttpFactory<Product>("/products")
 															);
 
+			containerRegistry.RegisterInstance<IHttpFactory<ProductTag>>(
+															new MockHttpFactory<ProductTag>("/products/tags")
+															);
+
 			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, MockHttpFactory<ProductCategory>>();
 
 			containerRegistry.RegisterForNavigation<NavigationPage>();

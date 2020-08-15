@@ -67,6 +67,9 @@
     <None Remove="Fonts\Palanquin-Bold.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Views\MainScreen\CategoryView %28copy%29.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\ProductListing\ProductDetailView.xaml.cs">
       <DependentUpon>..\MainView.xaml</DependentUpon>
       <SubType>Code</SubType>

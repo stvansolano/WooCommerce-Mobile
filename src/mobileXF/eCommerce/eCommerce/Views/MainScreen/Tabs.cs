@@ -14,11 +14,12 @@ namespace eCommerce.Views.MainScreen
 
 		protected override DataTemplate OnSelectTemplate(object model, BindableObject container)
 		{
-			if (model is NavigationItemViewModel navigable
-				&& navigable.Data is ProductCategory)
+			if (model is NavigationItemViewModel navigable1
+				&& navigable1.Data is ProductCategory)
 				return CategoryTemplate;
 
-			if (model is AllTagsTab)
+			if (model is NavigationItemViewModel navigable2
+				&& navigable2.Data is ProductTag)
 				return TagTemplate;
 
 			if (model is PopularTab)
