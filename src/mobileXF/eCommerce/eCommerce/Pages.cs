@@ -7,7 +7,15 @@
 	{
 		public ProductDetailPage()
 		{
-			Content = new ProductDetailView();
+			Content = new Views.ProductListing.ProductDetailView();
+		}
+	}
+
+	public class ProductListingPage : ApplicationPage
+	{
+		public ProductListingPage()
+		{
+			Content = new Views.ProductListing.ProductListingView();
 		}
 	}
 

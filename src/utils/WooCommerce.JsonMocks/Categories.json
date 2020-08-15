@@ -6,7 +6,17 @@
     "parent": 11,
     "description": "",
     "display": "default",
-    "image": {},
+    "image":
+    {
+      "id": 795,
+      "date_created": "2017-03-23T14:03:08",
+      "date_created_gmt": "2017-03-23T20:03:08",
+      "date_modified": "2017-03-23T14:03:08",
+      "date_modified_gmt": "2017-03-23T20:03:08",
+      "src": "https://static.ah.nl/image-optimization/static/product/AHI_43545239353939383432_1_LowRes_JPG.JPG?options=399,q85",
+      "name": "",
+      "alt": ""
+    },
     "menu_order": 0,
     "count": 4,
     "_links": {
@@ -35,12 +45,12 @@
     "description": "",
     "display": "default",
     "image": {
-      "id": 730,
-      "date_created": "2017-03-23T00:01:07",
-      "date_created_gmt": "2017-03-23T03:01:07",
-      "date_modified": "2017-03-23T00:01:07",
-      "date_modified_gmt": "2017-03-23T03:01:07",
-      "src": "https://example.com/wp-content/uploads/2017/03/T_2_front.jpg",
+      "id": 795,
+      "date_created": "2017-03-23T14:03:08",
+      "date_created_gmt": "2017-03-23T20:03:08",
+      "date_modified": "2017-03-23T14:03:08",
+      "date_modified_gmt": "2017-03-23T20:03:08",
+      "src": "https://static.ah.nl/image-optimization/static/product/AHI_43545239353939383432_1_LowRes_JPG.JPG?options=399,q85",
       "name": "",
       "alt": ""
     },
@@ -66,7 +76,16 @@
     "parent": 9,
     "description": "",
     "display": "default",
-    "image": {},
+    "image": {
+      "id": 795,
+      "date_created": "2017-03-23T14:03:08",
+      "date_created_gmt": "2017-03-23T20:03:08",
+      "date_modified": "2017-03-23T14:03:08",
+      "date_modified_gmt": "2017-03-23T20:03:08",
+      "src": "https://static.ah.nl/image-optimization/static/product/AHI_43545239353939383432_1_LowRes_JPG.JPG?options=399,q85",
+      "name": "",
+      "alt": ""
+    },
     "menu_order": 0,
     "count": 6,
     "_links": {
@@ -94,7 +113,16 @@
     "parent": 0,
     "description": "",
     "display": "default",
-    "image": {},
+    "image": {
+      "id": 795,
+      "date_created": "2017-03-23T14:03:08",
+      "date_created_gmt": "2017-03-23T20:03:08",
+      "date_modified": "2017-03-23T14:03:08",
+      "date_modified_gmt": "2017-03-23T20:03:08",
+      "src": "https://static.ah.nl/image-optimization/static/product/AHI_43545239353939383432_1_LowRes_JPG.JPG?options=399,q85",
+      "name": "",
+      "alt": ""
+    },
     "menu_order": 0,
     "count": 7,
     "_links": {
@@ -117,7 +145,16 @@
     "parent": 0,
     "description": "",
     "display": "default",
-    "image": {},
+    "image": {
+      "id": 795,
+      "date_created": "2017-03-23T14:03:08",
+      "date_created_gmt": "2017-03-23T20:03:08",
+      "date_modified": "2017-03-23T14:03:08",
+      "date_modified_gmt": "2017-03-23T20:03:08",
+      "src": "https://static.ah.nl/image-optimization/static/product/AHI_43545239353939383432_1_LowRes_JPG.JPG?options=399,q85",
+      "name": "",
+      "alt": ""
+    },
     "menu_order": 0,
     "count": 5,
     "_links": {
@@ -140,7 +177,16 @@
     "parent": 11,
     "description": "",
     "display": "default",
-    "image": {},
+    "image": {
+      "id": 795,
+      "date_created": "2017-03-23T14:03:08",
+      "date_created_gmt": "2017-03-23T20:03:08",
+      "date_modified": "2017-03-23T14:03:08",
+      "date_modified_gmt": "2017-03-23T20:03:08",
+      "src": "https://static.ah.nl/image-optimization/static/product/AHI_43545239353939383432_1_LowRes_JPG.JPG?options=399,q85",
+      "name": "",
+      "alt": ""
+    },
     "menu_order": 0,
     "count": 3,
     "_links": {
@@ -168,7 +214,16 @@
     "parent": 9,
     "description": "",
     "display": "default",
-    "image": {},
+    "image": {
+      "id": 795,
+      "date_created": "2017-03-23T14:03:08",
+      "date_created_gmt": "2017-03-23T20:03:08",
+      "date_modified": "2017-03-23T14:03:08",
+      "date_modified_gmt": "2017-03-23T20:03:08",
+      "src": "https://static.ah.nl/image-optimization/static/product/AHI_43545239353939383432_1_LowRes_JPG.JPG?options=399,q85",
+      "name": "",
+      "alt": ""
+    },
     "menu_order": 0,
     "count": 6,
     "_links": {

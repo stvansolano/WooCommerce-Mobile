@@ -35,9 +35,7 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Controls\" />
     <Folder Include="Views\MainScreen\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core.Logic\Core.Logic.csproj" />
+    <Folder Include="Views\ProductListing\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="ResourceDictionaries\Styles.stheiwissen.xaml" />
@@ -67,5 +65,14 @@
     
   <ItemGroup>
     <None Remove="Fonts\Palanquin-Bold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\ProductListing\ProductDetailView.xaml.cs">
+      <DependentUpon>..\MainView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Logic\Core.Logic.csproj" />
   </ItemGroup>
 </Project>

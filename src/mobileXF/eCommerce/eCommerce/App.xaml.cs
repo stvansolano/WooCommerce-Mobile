@@ -17,7 +17,7 @@ namespace eCommerce
 		internal class Constants
 		{
 			// ./ngrok 0.0.0.0:7071
-			public const string UrlEndpoint = "https://835b1bee481e.ngrok.io"; // "without /"
+			public const string UrlEndpoint = "https://69d81be48da1.ngrok.io"; // "without /"
 		}
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -33,7 +33,10 @@ namespace eCommerce
 
 			containerRegistry.RegisterForNavigation<NavigationPage>();
 
+			// ProductListing
+			containerRegistry.RegisterForNavigation<ProductListingPage, ProductListingViewModel>("ProductListing");
 			containerRegistry.RegisterForNavigation<ProductDetailPage, ProductDetailViewModel>("ProductDetail");
+
 			containerRegistry.RegisterForNavigation<MainPage, MainViewModel>();
 		}
 

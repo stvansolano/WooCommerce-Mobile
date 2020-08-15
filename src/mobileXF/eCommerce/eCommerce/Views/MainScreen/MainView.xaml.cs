@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Plugin.SharedTransitions;
-using WooCommerceNET.WooCommerce.v3;
 using Xamarin.Forms;
 
 namespace eCommerce.Views
@@ -22,8 +20,6 @@ namespace eCommerce.Views
             });
 
             _height = (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Height / Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Density) - 80;
-
-            //ProductOverview.SelectionChanged += ProductOverview_SelectionChanged;
         }
 
         async Task SwipeGestureRecognizer_SwipedUp()

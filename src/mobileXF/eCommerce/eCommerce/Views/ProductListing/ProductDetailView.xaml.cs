@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Xamarin.Forms;
-
-namespace eCommerce.Views
+﻿namespace eCommerce.Views.ProductListing
 {
 	public partial class ProductDetailView
 	{

@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using WooCommerceNET.WooCommerce.v3;
 using Xamarin.Forms;
 
 namespace eCommerce.Views.MainScreen
@@ -10,18 +12,19 @@ namespace eCommerce.Views.MainScreen
 		public DataTemplate PopularTemplate { get; set; }
 		public DataTemplate SearchTemplate { get; set; }
 
-		protected override DataTemplate OnSelectTemplate(object tab, BindableObject container)
+		protected override DataTemplate OnSelectTemplate(object model, BindableObject container)
 		{
-			if (tab is AllItemsTab)
+			if (model is NavigationItemViewModel navigable
+				&& navigable.Data is ProductCategory)
+				return CategoryTemplate;
+
+			if (model is AllTagsTab)
 				return TagTemplate;
 
-			if (tab is AllTagsTab)
-				return TagTemplate;
-
-			if (tab is PopularTab)
+			if (model is PopularTab)
 				return PopularTemplate;
 
-			if (tab is SearchTab)
+			if (model is SearchTab)
 				return SearchTemplate;
 
 			return null;
@@ -40,10 +43,8 @@ namespace eCommerce.Views.MainScreen
 	{
 		public AllItemsTab()
 		{
-			Items = new ObservableCollection<object>{
-						"test1", "test2", "test3"
-					};
-
+			Id = "A";
+			Items = new ObservableCollection<object>();
 			Title = "All";
 		}
 	}
@@ -52,10 +53,8 @@ namespace eCommerce.Views.MainScreen
 	{
 		public AllTagsTab()
 		{
-			Items = new ObservableCollection<object>{
-						"tag1", "tag2", "tag3"
-					};
-
+			Id = "T";
+			Items = new ObservableCollection<object>();
 			Title = "Explore";
 		}
 	}
@@ -64,10 +63,8 @@ namespace eCommerce.Views.MainScreen
 	{
 		public PopularTab()
 		{
-			Items = new ObservableCollection<object>{
-						"item1", "item2", "item3"
-					};
-
+			Id = "P";
+			Items = new ObservableCollection<object>();
 			Title = "Popular";
 		}
 	}
@@ -76,10 +73,8 @@ namespace eCommerce.Views.MainScreen
 	{
 		public SearchTab()
 		{
-			Items = new ObservableCollection<object>{
-						"result1", "result2", "result3"
-					};
-
+			Id = "S";
+			Items = new ObservableCollection<object>();
 			Title = "Search";
 		}
 	}

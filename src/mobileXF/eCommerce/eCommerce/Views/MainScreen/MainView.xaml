@@ -8,13 +8,12 @@
              xmlns:controls="clr-namespace:eCommerce.Controls"
              xmlns:mainScreen="clr-namespace:eCommerce.Views.MainScreen"
              xmlns:pancakes="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
              >
-    <!--
-    Credits to: @sthewissen
-    Link: https://github.com/sthewissen/FocusOnXamarin/blob/master/FocusOnXamarin/MainPage.xaml
-    -->
-
+    <ContentView.Resources>
+        <DataTemplate x:Key="CategoryTemplateKey">
+            <mainScreen:CategoryView />
+        </DataTemplate>
+    </ContentView.Resources>
     <Grid BackgroundColor="{StaticResource color_black}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -58,12 +57,8 @@
                                                     Direction="Column"
                                                     Wrap="NoWrap">
                                             <BindableLayout.ItemTemplateSelector>
-                                                <mainScreen:TabTemplateSelector>
-                                                    <mainScreen:TabTemplateSelector.CategoryTemplate>
-                                                        <DataTemplate>
-                                                            <Label Text="{Binding}" Background="Blue" />
-                                                        </DataTemplate>
-                                                    </mainScreen:TabTemplateSelector.CategoryTemplate>
+                                                <mainScreen:TabTemplateSelector
+                                                        CategoryTemplate="{StaticResource CategoryTemplateKey}">
                                                     <mainScreen:TabTemplateSelector.TagTemplate>
                                                         <DataTemplate>
                                                             <Label Text="{Binding}" Background="Red" />

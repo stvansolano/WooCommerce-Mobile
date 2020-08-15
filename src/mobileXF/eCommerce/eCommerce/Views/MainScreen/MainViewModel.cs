@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -17,8 +17,9 @@ namespace eCommerce
 	public class MainViewModel : Prism.Mvvm.BindableBase, IInitialize, IInitializeAsync, INavigationAware
 	{
 		public ICommand RefreshCommand { get; set; }
-		public ICommand SelectedItemCommand { get; set; }
-		public ObservableCollection<Product> Products { get; set; } = new ObservableCollection<Product>();
+
+		public INavigationService NavigationService { get; }
+		public IHttpFactory<ProductCategory> CategoryService { get; }
 
 		private Tab _item;
 		public Tab Item
@@ -31,83 +32,43 @@ namespace eCommerce
 			}
 		}
 
-		public ObservableCollection<Tab> TabItems { get; set; } = new ObservableCollection<Tab>
-			{
-				new AllItemsTab
-				{
-					Title="All",
-					Selected = true,
-					Id = "A"
-				},
-				 new AllTagsTab
-				{
-					Title="Featured",
-					Id = "F"
-
-				},
-				new PopularTab
-				{
-					Id = "P"
-				},
-				new SearchTab
-				{
-					Id = "T"
-				}
-			};
-
+		public AllItemsTab AllItems { get; }
+		public PopularTab AllPopular { get; }
+		public AllTagsTab AllTags { get; }
+		public SearchTab Search { get; }
+		public ObservableCollection<Tab> TabItems { get; private set; } = new ObservableCollection<Tab>();
 
 		public MainViewModel(IContainerProvider dependencyProvider, INavigationService navigationService)
 		{
 			NavigationService = navigationService;
-			ProductService = dependencyProvider.Resolve<IHttpFactory<Product>>();
 
 			CategoryService = dependencyProvider.Resolve<IHttpFactory<ProductCategory>>();
 
 			RefreshCommand = new DelegateCommand(async () => await RefreshDataAsync());
-			SelectedItemCommand = new DelegateCommand<Product>(async selectedItem =>
-			{
-				var parameters = new NavigationParameters();
-				parameters.Add("Product", selectedItem);
 
-				await NavigationService.NavigateAsync("ProductDetail", parameters);
-			});
+			TabItems.Add(AllItems = new AllItemsTab { Selected = true });
+			TabItems.Add(AllTags = new AllTagsTab());
+			TabItems.Add(AllPopular = new PopularTab());
+			TabItems.Add(Search = new SearchTab());
 		}
 
 		private async Task RefreshDataAsync()
 		{
-			var store = await ProductService.GetAsync();
-
-			Products.Clear();
-
-			foreach (Product item in store.Result)
-			{
-#if USE_MOCKS
-				if (item.images == null || item.images.Any() == false)
-				{
-					item.images = new System.Collections.Generic.List<ProductImage>();
-					item.images.Add(new ProductImage
-					{
-						src = "https://static.ah.nl/image-optimization/static/product/AHI_43545239353939383432_1_LowRes_JPG.JPG?options=399,q85"
-					});
-				}
-#endif
-				Products.Add(item);
-			}
-
 			var categories = await CategoryService.GetAsync("/products/categories");
-
-			Console.WriteLine($"Products: {(store?.Result ?? new Product[0]).Length}");
 			Console.WriteLine($"Categories: {(categories?.Result ?? new ProductCategory[0]).Length}");
+
+			AllItems.Items.Clear();
+
+			foreach (var item in categories.Result)
+			{
+				var navigableItem = new NavigationItemViewModel(item, NavigationService);
+
+				AllItems.Items.Add(navigableItem);
+			}
 		}
-
-		public INavigationService NavigationService { get; }
-		public IHttpFactory<Product> ProductService { get; }
-
-		public IHttpFactory<ProductCategory> CategoryService { get; }
 
 		public void Initialize(INavigationParameters parameters)
 		{
-			ProductService.BaseUrl = App.Constants.UrlEndpoint;
 		}
 
 		public Task InitializeAsync(INavigationParameters parameters)
