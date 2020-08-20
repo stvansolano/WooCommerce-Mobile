@@ -88,19 +88,15 @@ namespace eCommerce
 			}
 		}
 
-		public void Initialize(INavigationParameters parameters)
-		{
-		}
+		public void Initialize(INavigationParameters parameters) { }
 
 		public Task InitializeAsync(INavigationParameters parameters)
 		{
 			return Task.CompletedTask;
 		}
 
-		public void OnNavigatedFrom(INavigationParameters parameters)
-		{
-		}
-
+		public void OnNavigatedFrom(INavigationParameters parameters) { }
+		
 		public async void OnNavigatedTo(INavigationParameters parameters)
 		{
 			await RefreshDataAsync();

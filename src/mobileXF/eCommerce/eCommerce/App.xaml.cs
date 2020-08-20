@@ -16,11 +16,6 @@ namespace eCommerce
 {
 	public partial class App
 	{
-		internal class Constants
-		{
-			internal const string UrlEndpoint = "https://my-woo-store.azurewebsites.net/";
-		}
-
 		static App()
 		{
 			// ./ngrok 0.0.0.0:7071
@@ -37,14 +32,19 @@ namespace eCommerce
 			containerRegistry.RegisterInstance(Container);
 			containerRegistry.RegisterInstance(_api);
 
-			containerRegistry.RegisterSingleton<IHttpFactory<Product>, HttpProductFactory>();
-															//new MockHttpFactory<Product>("/products")
-															//);
+			var productService = new HttpProductFactory(_api);
 
+			// Products
+			containerRegistry.RegisterInstance<IHttpFactory<Product>>(productService);
+			containerRegistry.RegisterInstance<IHttpProductFactory>(productService);
+			//new MockHttpFactory<Product>("/products")
+
+			// Tags
 			containerRegistry.RegisterSingleton<IHttpFactory<ProductTag>, HttpProductTagFactory>();
-															//new MockHttpFactory<ProductTag>("/products/tags")
-															//);
+			//new MockHttpFactory<ProductTag>("/products/tags")
+			//);
 
+			// Categories
 			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, HttpProductCategoryFactory>();
 
 			containerRegistry.RegisterForNavigation<NavigationPage>();

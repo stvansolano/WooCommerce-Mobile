@@ -26,17 +26,22 @@
 
             </pancakes:PancakeView>
             <StackLayout x:Name="textContainer">
-                <Label Text="{Binding Data.name}"
+                <Label
                     FontSize="Large"
                     LineBreakMode="TailTruncation"
                     TextColor="{DynamicResource mainLabel}"
                     FontFamily="{StaticResource InterBold}"
-                    Margin="0, 20, 0, 0"/>
-            <Label Text="{Binding SubTitle}"
-                   LineBreakMode="TailTruncation"
-                   TextColor="{DynamicResource secondaryLabel}"
-                   VerticalOptions="Center"
-                   FontSize="Small"/>
+                    Margin="0, 20, 0, 0">
+
+                      <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Data.name}" TextColor="{DynamicResource mainLabel}" />
+                            <Span Text=" (" TextColor="{DynamicResource secondaryLabel}" />
+                            <Span Text="{Binding Data.count}" TextColor="{DynamicResource secondaryLabel}" />
+                            <Span Text=")" TextColor="{DynamicResource secondaryLabel}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
             </StackLayout>
         </AbsoluteLayout>
     </StackLayout>

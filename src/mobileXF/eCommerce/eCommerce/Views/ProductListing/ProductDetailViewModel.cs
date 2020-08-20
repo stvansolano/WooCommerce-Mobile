@@ -19,7 +19,7 @@ namespace eCommerce.ViewModels
 			NavigationService = navigationService;
 			ProductService = dependencyProvider.Resolve<IHttpFactory<Product>>();
 
-			GoBackCommand = new DelegateCommand(async() => await NavigationService.GoBackAsync());
+			GoBackCommand = new DelegateCommand(async () => await NavigationService.GoBackAsync());
 		}
 
 		public INavigationService NavigationService { get; }
@@ -37,19 +37,14 @@ namespace eCommerce.ViewModels
 			}
 		}
 
-		public void Initialize(INavigationParameters parameters)
-		{
-			ProductService.BaseUrl = App.Constants.UrlEndpoint;
-		}
+		public void Initialize(INavigationParameters parameters){ }
 
 		public Task InitializeAsync(INavigationParameters parameters)
 		{
 			return Task.CompletedTask;
 		}
 
-		public void OnNavigatedFrom(INavigationParameters parameters)
-		{
-		}
+		public void OnNavigatedFrom(INavigationParameters parameters){ }
 
 		public void OnNavigatedTo(INavigationParameters parameters)
 		{

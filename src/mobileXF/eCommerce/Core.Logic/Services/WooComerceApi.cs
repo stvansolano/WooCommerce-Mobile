@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WooCommerceNET;
 using WooCommerceNET.WooCommerce.v3;
@@ -40,6 +41,17 @@ namespace Core.Logic
 			var obj = GetObject();
 
 			var result = await obj.Category.GetAll();
+
+			return result.ToArray();
+		}
+
+		public async Task<Product[]> GetProducts(int categoryId)
+		{
+			var obj = GetObject();
+
+			var parameters = new Dictionary<string, string>();
+			parameters.Add("category", categoryId.ToString());
+			var result = await obj.Product.GetAll(parameters);
 
 			return result.ToArray();
 		}

@@ -16,7 +16,7 @@ namespace eCommerce.Views.MainScreen
 
 			GoToDetailCommand = new DelegateCommand(async () => {
 				var navigationParameters = new NavigationParameters();
-				navigationParameters.Add("Detail", Data);
+				navigationParameters.Add("Parent", Data);
 				await navigationService.NavigateAsync("ProductListing", navigationParameters);
 			});
 		}

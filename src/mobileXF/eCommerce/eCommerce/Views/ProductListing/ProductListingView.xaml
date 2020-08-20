@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pancakes="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              x:Class="eCommerce.Views.ProductListing.ProductListingView">
+
     <StackLayout Orientation="Vertical">
         <Button Style="{StaticResource menu_button}"
                 Command="{Binding GoBackCommand}"
                 Text="arrow-left2" />
-
-
+     
         <CollectionView x:Name="ProductOverview"
                      ItemsSource="{Binding Products}"
                      VerticalScrollBarVisibility="Never"
@@ -18,8 +18,9 @@
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="2"
-                    VerticalItemSpacing="20"
-                    HorizontalItemSpacing="20" />
+                                 VerticalItemSpacing="10"
+                                 HorizontalItemSpacing="20"
+                                 />
             </CollectionView.ItemsLayout>
 
             <CollectionView.Header>
@@ -30,6 +31,14 @@
                             HorizontalOptions="Start"
                             Margin="20,0"
                             Text="arrow-left2" />
+
+                       <Label FontSize="Large"
+                              LineBreakMode="TailTruncation"
+                              TextColor="{DynamicResource mainLabel}"
+                              FontFamily="{StaticResource InterBold}"
+                              Margin="20, 0"
+                              Text="{Binding Parent.name}"
+                              />
 
                     <RefreshView IsRefreshing="True"
                             Margin="20,0" Background="Blue"
@@ -42,7 +51,7 @@
                 <DataTemplate>
                     <StackLayout>
                         <pancakes:PancakeView Style="{StaticResource product_card}"
-                                                HeightRequest="200">
+                                              HeightRequest="240">
                             <StackLayout>
 
                                 <Image Source="{Binding images[0].src}"
@@ -53,13 +62,14 @@
                                                    
                                 -->
                                 <Label Style="{StaticResource product_card_price}"
-                                        Text="{Binding Price, StringFormat='{0:c}' }" />
+                                       Text="{Binding price, StringFormat='{0:c}' }"
+                                       />
 
                                 <Label Style="{StaticResource product_card_name}"
-                                        Text="{Binding name}" />
-
-                                <Label Style="{StaticResource product_card_weight}"
-                                        Text="{Binding WeightInGrams, StringFormat='{0}g'}" />
+                                       Text="{Binding name}"
+                                       VerticalOptions="End"
+                                       VerticalTextAlignment="End"
+                                       />
 
                             </StackLayout>
                         </pancakes:PancakeView>

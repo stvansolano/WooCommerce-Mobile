@@ -96,7 +96,7 @@ Link: https://github.com/sthewissen/FocusOnXamarin/blob/master/FocusOnXamarin/Ap
 
             <Style x:Key="product_card" TargetType="pancakes:PancakeView">
                 <Setter Property="CornerRadius" Value="20"/>
-                <Setter Property="Padding" Value="20"/>
+                <Setter Property="Padding" Value="10"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource color_white}"/>
             </Style>
 
@@ -107,7 +107,6 @@ Link: https://github.com/sthewissen/FocusOnXamarin/blob/master/FocusOnXamarin/Ap
             <Style x:Key="product_card_name" TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource PalanquinBold}"/>
                 <Setter Property="FontSize" Value="18"/>
-                <Setter Property="LineHeight" Value=".7"/>
             </Style>
 
             <Style x:Key="product_card_price" TargetType="Label">
