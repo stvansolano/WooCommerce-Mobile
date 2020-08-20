@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 using Core.Logic;
 using Core.Logic.Http;
-using eCommerce.Services;
+using Core.Logic.Services;
 using eCommerce.ViewModels;
 using WooCommerce.Mocks;
 
@@ -23,30 +23,10 @@ namespace eCommerce
 			WooCommerce.Mocks.MockUtils.BaseUrl = "https://69d81be48da1.ngrok.io"; // "without /"
 		}
 
-		private WooComerceApi _api = new WooComerceApi(websiteRoot: eCommerce.Helpers.Secrets.Website,
-													   client: eCommerce.Helpers.Secrets.ClientId,
-													   secret: eCommerce.Helpers.Secrets.ClientSecret);
-
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
 			containerRegistry.RegisterInstance(Container);
-			containerRegistry.RegisterInstance(_api);
-
-			var productService = new HttpProductFactory(_api);
-
-			// Products
-			containerRegistry.RegisterInstance<IHttpFactory<Product>>(productService);
-			containerRegistry.RegisterInstance<IHttpProductFactory>(productService);
-			//new MockHttpFactory<Product>("/products")
-
-			// Tags
-			containerRegistry.RegisterSingleton<IHttpFactory<ProductTag>, HttpProductTagFactory>();
-			//new MockHttpFactory<ProductTag>("/products/tags")
-			//);
-
-			// Categories
-			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, HttpProductCategoryFactory>();
-
+			containerRegistry.RegisterServices();
 			containerRegistry.RegisterForNavigation<NavigationPage>();
 
 			// ProductListing
@@ -101,6 +81,33 @@ namespace eCommerce
 			{
 				Content = layout
 			};
+		}
+	}
+
+	public static class AppExtensions
+	{
+		public static void RegisterServices(this IContainerRegistry containerRegistry)
+		{
+			var api = new WooComerceApi(websiteRoot: eCommerce.Helpers.Secrets.Website,
+													   client: eCommerce.Helpers.Secrets.ClientId,
+													   secret: eCommerce.Helpers.Secrets.ClientSecret);
+
+			containerRegistry.RegisterInstance(api);
+
+			var productService = new MockProductService();
+
+			// Products
+			containerRegistry.RegisterInstance<IHttpFactory<Product>>(productService);
+			containerRegistry.RegisterInstance<IProductService>(productService);
+
+			// Tags
+			containerRegistry.RegisterSingleton<IHttpFactory<ProductTag>, ProductTagService>();
+			//new MockHttpFactory<ProductTag>("/products/tags")
+			//);
+
+			// Categories
+			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, ProductCategoryService>();
+
 		}
 	}
 }

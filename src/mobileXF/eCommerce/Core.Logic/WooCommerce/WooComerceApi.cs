@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using WooCommerceNET;
 using WooCommerceNET.WooCommerce.v3;
 
-namespace Core.Logic
+namespace Core.Logic.Services
 {
 	public class WooComerceApi
 	{

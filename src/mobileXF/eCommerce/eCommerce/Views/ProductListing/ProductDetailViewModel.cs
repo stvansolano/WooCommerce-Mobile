@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
-using Core.Logic.Http;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Navigation;
@@ -17,13 +16,11 @@ namespace eCommerce.ViewModels
 		public ProductDetailViewModel(IContainerProvider dependencyProvider, INavigationService navigationService)
 		{
 			NavigationService = navigationService;
-			ProductService = dependencyProvider.Resolve<IHttpFactory<Product>>();
 
 			GoBackCommand = new DelegateCommand(async () => await NavigationService.GoBackAsync());
 		}
 
 		public INavigationService NavigationService { get; }
-		public IHttpFactory<Product> ProductService { get; }
 		public ICommand GoBackCommand { get; set; }
 
 		private Product _product;

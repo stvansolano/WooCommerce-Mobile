@@ -32,8 +32,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Services\WooCommerce\" />
     <Folder Include="Styles\" />
     <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
@@ -42,19 +40,10 @@
     <Folder Include="Views\ProductListing\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Remove="ResourceDictionaries\Styles.stheiwissen.xaml" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Fonts\IcoMoon-Free.ttf" />
     <None Remove="Fonts\Palanquin-Regular.ttf" />
     <None Remove="Fonts\Palanquin-Light.ttf" />
     <None Remove="Fonts\Palanquin-Bold.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ResourceDictionaries\Styles.stheiwissen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Fonts\IcoMoon-Free.ttf" />

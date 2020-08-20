@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -15,8 +14,10 @@ namespace eCommerce.Views.MainScreen
 			Navigation = navigationService;
 
 			GoToDetailCommand = new DelegateCommand(async () => {
+
 				var navigationParameters = new NavigationParameters();
 				navigationParameters.Add("Parent", Data);
+
 				await navigationService.NavigateAsync("ProductListing", navigationParameters);
 			});
 		}

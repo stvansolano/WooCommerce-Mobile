@@ -1,8 +1,7 @@
 ﻿using System.Net;
-using Core.Logic;
 using Core.Logic.Http;
 
-namespace WooCommerce.Services
+namespace Core.Logic.Services
 {
 	public abstract class WooCommerceFactory<T> : HttpFactory<T>
 		where T : class, new()

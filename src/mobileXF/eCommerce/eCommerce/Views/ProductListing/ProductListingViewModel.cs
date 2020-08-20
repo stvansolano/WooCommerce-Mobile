@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Core.Logic.Http;
-using eCommerce.Services;
+using Core.Logic.Services;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Navigation;
@@ -17,6 +17,9 @@ namespace eCommerce.ViewModels
 										   IInitialize, IInitializeAsync,
 										   INavigationAware
 	{
+		public INavigationService NavigationService { get; }
+		public IProductService ProductService { get; }
+		public ICommand GoBackCommand { get; set; }
 		public ICommand SelectedItemCommand { get; set; }
 		public ObservableCollection<Product> Products { get; set; } = new ObservableCollection<Product>();
 
@@ -33,7 +36,7 @@ namespace eCommerce.ViewModels
 		public ProductListingViewModel(IContainerProvider dependencyProvider, INavigationService navigationService)
 		{
 			NavigationService = navigationService;
-			ProductService = dependencyProvider.Resolve<IHttpProductFactory>();
+			ProductService = dependencyProvider.Resolve<IProductService>();
 
 			GoBackCommand = new DelegateCommand(async() => await NavigationService.GoBackAsync());
 
@@ -46,10 +49,6 @@ namespace eCommerce.ViewModels
 			});
 		}
 
-		public INavigationService NavigationService { get; }
-		public IHttpProductFactory ProductService { get; }
-		public ICommand GoBackCommand { get; set; }
-
 		public void Initialize(INavigationParameters parameters) { }
 
 		public Task InitializeAsync(INavigationParameters parameters)
@@ -57,9 +56,7 @@ namespace eCommerce.ViewModels
 			return Task.CompletedTask;
 		}
 
-		public void OnNavigatedFrom(INavigationParameters parameters)
-		{
-		}
+		public void OnNavigatedFrom(INavigationParameters parameters) { }
 
 		public async void OnNavigatedTo(INavigationParameters parameters)
 		{
@@ -102,6 +99,8 @@ namespace eCommerce.ViewModels
 			return ProductService.GetAsync();
 		}
 
+		#if USE_MOCKS
+
 		private void Decorate(Product item)
 		{
 			if (item.images == null || item.images.Any() == false)
@@ -113,5 +112,7 @@ namespace eCommerce.ViewModels
 				});
 			}
 		}
+
+		#endif
 	}
 }

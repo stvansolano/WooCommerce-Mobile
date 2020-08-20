@@ -23,7 +23,7 @@ namespace WooCommerce.Mocks
             => MockUtils.GetMockerverUrl(endpointName ?? _defaultEndpoint);
     }
 
-    public static class MockUtils
+	public static class MockUtils
     {
         public static string BaseUrl { get; set; }
 
