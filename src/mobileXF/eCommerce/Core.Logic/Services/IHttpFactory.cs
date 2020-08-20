@@ -2,7 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 
-namespace eCommerce.Core.Http
+namespace Core.Logic.Http
 {
     public interface IHttpFactory<T>
 		where T : class, new()
@@ -12,9 +12,7 @@ namespace eCommerce.Core.Http
         Task<HttpResponse<T[]>> GetAsync(string endpointName = null, HttpRequest request = null);
     }
 
-    public class HttpRequest
-    {
-    }
+    public class HttpRequest { }
 
     public class HttpResponse<T>
     {

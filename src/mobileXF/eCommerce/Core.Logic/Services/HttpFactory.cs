@@ -2,10 +2,9 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using eCommerce.Core.Http;
 using Newtonsoft.Json;
 
-namespace eCommerce.Http
+namespace Core.Logic.Http
 {
     public class HttpFactory<T> : IHttpFactory<T>
         where T : class, new()

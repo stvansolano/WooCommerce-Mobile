@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using eCommerce.Core.Http;
+using Core.Logic.Http;
 using eCommerce.Views.MainScreen;
 using Prism.Commands;
 using Prism.Ioc;

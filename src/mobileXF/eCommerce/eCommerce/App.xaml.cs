@@ -1,14 +1,16 @@
 ﻿using System;
-using Prism;
+using System.Diagnostics;
+
+using Core.Logic;
+using Core.Logic.Http;
+using eCommerce.Services;
+using eCommerce.ViewModels;
+using WooCommerce.Mocks;
+
 using Prism.Ioc;
-using Xamarin.Forms;
 
 using WooCommerceNET.WooCommerce.v3;
-using WooCommerce.Mocks;
-using System.Diagnostics;
-using eCommerce.Core.Http;
-using eCommerce.Views;
-using eCommerce.ViewModels;
+using Xamarin.Forms;
 
 namespace eCommerce
 {
@@ -16,30 +18,34 @@ namespace eCommerce
 	{
 		internal class Constants
 		{
-			// ./ngrok 0.0.0.0:7071
-			public const string UrlEndpoint = "https://69d81be48da1.ngrok.io"; // "without /"
+			internal const string UrlEndpoint = "https://my-woo-store.azurewebsites.net/";
 		}
 
 		static App()
 		{
+			// ./ngrok 0.0.0.0:7071
 			// http://localhost:7071/api/MockServer?url=/wp-json/wc/v3/products
-			WooCommerce.Mocks.MockUtils.BaseUrl = Constants.UrlEndpoint;
+			WooCommerce.Mocks.MockUtils.BaseUrl = "https://69d81be48da1.ngrok.io"; // "without /"
 		}
+
+		private WooComerceApi _api = new WooComerceApi(websiteRoot: App.Constants.UrlEndpoint,
+													   client: "",
+													   secret: "");
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
 			containerRegistry.RegisterInstance(Container);
+			containerRegistry.RegisterInstance(_api);
 
-			//containerRegistry.Register<ILoggerFacade, Services.DebugLogger>();
-			containerRegistry.RegisterInstance<IHttpFactory<Product>>(
-															new MockHttpFactory<Product>("/products")
-															);
+			containerRegistry.RegisterSingleton<IHttpFactory<Product>, HttpProductFactory>();
+															//new MockHttpFactory<Product>("/products")
+															//);
 
-			containerRegistry.RegisterInstance<IHttpFactory<ProductTag>>(
-															new MockHttpFactory<ProductTag>("/products/tags")
-															);
+			containerRegistry.RegisterSingleton<IHttpFactory<ProductTag>, HttpProductTagFactory>();
+															//new MockHttpFactory<ProductTag>("/products/tags")
+															//);
 
-			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, MockHttpFactory<ProductCategory>>();
+			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, HttpProductCategoryFactory>();
 
 			containerRegistry.RegisterForNavigation<NavigationPage>();
 

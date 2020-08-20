@@ -1,31 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using WooCommerceNET;
 using WooCommerceNET.WooCommerce.v3;
-using WooCommerceNET.WooCommerce.v3.Extension;
 
 namespace Core.Logic
 {
 	public class WooComerceApi
 	{
-		public async Task<List<Product>> Get()
+		public WooComerceApi(string websiteRoot, string client, string secret)
 		{
-			//RestAPI rest = new RestAPI("http://www.yourstore.co.nz/wp-json/wp/v2/", "<Client_Key>", "<Client_Secret>");
+			Endpoint = websiteRoot;
+			Client = client;
+			Secret = secret;
+		}
 
-			//using OAuth
-//			RestAPI rest = new RestAPI("http://www.yourstore.co.nz/wp-json/wp/v2/", "<Client_Key>", "<Client_Secret>");
-			//rest.oauth_token = "<OAuth_Token>";
-			//rest.oauth_token_secret = "<OAuth_Token_Secret>";
-
-
-			RestAPI rest = new RestAPI("http://www.yourstore.co.nz/wp-json/wc/v3/", "<WooCommerce Key>", "<WooCommerce Secret");
+		private WCObject GetObject()
+		{
+			RestAPI rest = new RestAPI($"{Endpoint}/wp-json/wc/v3/", Client, Secret);
 			WCObject wc = new WCObject(rest);
 
-			//Get all products
-			var products = await wc.Product.GetAll();
+			return wc;
+		}
 
-			return products;
+		public string Endpoint { get; }
+		public string Client { get; }
+		public string Secret { get; }
+
+		public async Task<Product[]> GetProducts()
+		{
+			var obj = GetObject();
+
+			var result = await obj.Product.GetAll();
+
+			return result.ToArray();
+		}
+
+		public async Task<ProductCategory[]> GetCategories()
+		{
+			var obj = GetObject();
+
+			var result = await obj.Category.GetAll();
+
+			return result.ToArray();
+		}
+
+		public async Task<ProductTag[]> GetTags()
+		{
+			var obj = GetObject();
+
+			var result = await obj.Tag.GetAll();
+
+			return result.ToArray();
 		}
 	}
 }

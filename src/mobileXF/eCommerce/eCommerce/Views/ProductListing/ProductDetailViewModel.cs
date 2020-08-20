@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
-using eCommerce.Core.Http;
+using Core.Logic.Http;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Navigation;

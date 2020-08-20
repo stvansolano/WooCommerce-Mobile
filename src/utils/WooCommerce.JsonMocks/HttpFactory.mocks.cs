@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
-using eCommerce.Core.Http;
-using eCommerce.Http;
+using Core.Logic.Http;
 
 namespace WooCommerce.Mocks
 {
