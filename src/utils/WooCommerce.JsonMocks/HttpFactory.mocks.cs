@@ -2,9 +2,8 @@
 using System.Threading.Tasks;
 using eCommerce.Core.Http;
 using eCommerce.Http;
-using eCommerce.Services;
 
-namespace eCommerce.Mocks
+namespace WooCommerce.Mocks
 {
     public class MockHttpFactory<T> : HttpFactory<T>
         where T : class, new()
@@ -27,15 +26,14 @@ namespace eCommerce.Mocks
 
     public static class MockUtils
     {
+        public static string BaseUrl { get; set; }
+
         public static string GetMockerverUrl(string endpointName)
         {
             const string API_SEGMENT = "/wp-json/wc/v3";
 
-            const string TEMP_MOCK_URL = App.Constants.UrlEndpoint;
-            // http://localhost:7071/api/MockServer?url=/wp-json/wc/v3/products
-
             var encoded = WebUtility.UrlEncode(API_SEGMENT + endpointName);
-            var result = TEMP_MOCK_URL + $"/api/MockServer?url={encoded}";
+            var result = BaseUrl + $"/api/MockServer?url={encoded}";
 
             return result;
         }

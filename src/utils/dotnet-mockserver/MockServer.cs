@@ -54,7 +54,7 @@ namespace MockServer
 
 		private static async Task<IActionResult> FromFile(string fileName)
 		{
-			var jsonContents = await WooCommerce.JsonMocks.Resources.GetContentAsync(fileName);
+			var jsonContents = await WooCommerce.Mocks.Resources.GetContentAsync(fileName);
 
 			var result = new CustomStatusCodeResult(HttpStatusCode.OK, jsonContents);
 

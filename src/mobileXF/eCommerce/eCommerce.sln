@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MockServer", "MockServer", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockServer", "..\..\utils\dotnet-mockserver\MockServer.csproj", "{02DA9B3D-30BD-4A64-A410-9F3F660EF10E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WooCommerce.JsonMocks", "..\..\utils\WooCommerce.JsonMocks\WooCommerce.JsonMocks.csproj", "{8FE4A4EC-3842-4367-97ED-CBF6F11D1FF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WooCommerce.Mocks", "..\..\utils\WooCommerce.JsonMocks\WooCommerce.Mocks.csproj", "{8FE4A4EC-3842-4367-97ED-CBF6F11D1FF7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Logic", "Core.Logic\Core.Logic.csproj", "{8B3C4C06-DB02-42A9-A320-483CE10D6D1F}"
 EndProject

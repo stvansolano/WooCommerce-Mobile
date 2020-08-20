@@ -4,7 +4,7 @@ using Prism.Ioc;
 using Xamarin.Forms;
 
 using WooCommerceNET.WooCommerce.v3;
-using eCommerce.Mocks;
+using WooCommerce.Mocks;
 using System.Diagnostics;
 using eCommerce.Core.Http;
 using eCommerce.Views;
@@ -18,6 +18,12 @@ namespace eCommerce
 		{
 			// ./ngrok 0.0.0.0:7071
 			public const string UrlEndpoint = "https://69d81be48da1.ngrok.io"; // "without /"
+		}
+
+		static App()
+		{
+			// http://localhost:7071/api/MockServer?url=/wp-json/wc/v3/products
+			WooCommerce.Mocks.MockUtils.BaseUrl = Constants.UrlEndpoint;
 		}
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)

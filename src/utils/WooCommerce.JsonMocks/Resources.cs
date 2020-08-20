@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace WooCommerce.JsonMocks
+namespace WooCommerce.Mocks
 {
 	public static class Resources
 	{
@@ -19,7 +19,7 @@ namespace WooCommerce.JsonMocks
 
 		public static async Task<string> GetContentAsync(string resourceName)
 		{
-			using (var memoryStream = typeof(Resources).Assembly.GetManifestResourceStream("WooCommerce.JsonMocks." + resourceName))
+			using (var memoryStream = typeof(Resources).Assembly.GetManifestResourceStream($"WooCommerce.{nameof(Mocks)}." + resourceName))
 			{
 				if (memoryStream == null)
 				{
