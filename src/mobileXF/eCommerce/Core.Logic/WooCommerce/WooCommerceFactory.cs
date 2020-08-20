@@ -13,9 +13,10 @@ namespace Core.Logic.Services
 
 		public WooComerceApi ApiInstance { get; }
 
-		protected HttpResponse<T[]> Ok(T[] result)
+		protected HttpResponse<TObject[]> Ok<TObject>(TObject[] result)
+			where TObject : class, new()
 		{
-			return new HttpResponse<T[]>(result, HttpStatusCode.OK);
+			return new HttpResponse<TObject[]>(result, HttpStatusCode.OK);
 		}
 	}
 }

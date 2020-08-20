@@ -89,12 +89,12 @@ namespace eCommerce
 		public static void RegisterServices(this IContainerRegistry containerRegistry)
 		{
 			var api = new WooComerceApi(websiteRoot: eCommerce.Helpers.Secrets.Website,
-													   client: eCommerce.Helpers.Secrets.ClientId,
-													   secret: eCommerce.Helpers.Secrets.ClientSecret);
+													 client: eCommerce.Helpers.Secrets.ClientId,
+													 secret: eCommerce.Helpers.Secrets.ClientSecret);
 
 			containerRegistry.RegisterInstance(api);
 
-			var productService = new MockProductService();
+			var productService = new ProductService(api);
 
 			// Products
 			containerRegistry.RegisterInstance<IHttpFactory<Product>>(productService);
@@ -107,7 +107,6 @@ namespace eCommerce
 
 			// Categories
 			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, ProductCategoryService>();
-
 		}
 	}
 }

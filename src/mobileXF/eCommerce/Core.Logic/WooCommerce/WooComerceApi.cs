@@ -36,6 +36,15 @@ namespace Core.Logic.Services
 			return result.ToArray();
 		}
 
+		public async Task<Variation[]> GetProductVariations(int productId)
+		{
+			var obj = GetObject();
+
+			var result = await obj.Product.Variations.GetAll(productId);
+
+			return result.ToArray();
+		}
+
 		public async Task<ProductCategory[]> GetCategories()
 		{
 			var obj = GetObject();
