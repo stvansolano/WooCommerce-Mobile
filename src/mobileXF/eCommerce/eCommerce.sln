@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{513595B9-0702-46CC-98C8-9DB6B9B95E67}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MockServer", "MockServer", "{2A3301F3-EE4E-4FC7-8852-672D99C1D007}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mocks", "Mocks", "{2A3301F3-EE4E-4FC7-8852-672D99C1D007}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockServer", "..\..\utils\dotnet-mockserver\MockServer.csproj", "{02DA9B3D-30BD-4A64-A410-9F3F660EF10E}"
 EndProject

@@ -28,9 +28,9 @@ namespace eCommerce
 			WooCommerce.Mocks.MockUtils.BaseUrl = "https://69d81be48da1.ngrok.io"; // "without /"
 		}
 
-		private WooComerceApi _api = new WooComerceApi(websiteRoot: App.Constants.UrlEndpoint,
-													   client: "",
-													   secret: "");
+		private WooComerceApi _api = new WooComerceApi(websiteRoot: eCommerce.Helpers.Secrets.Website,
+													   client: eCommerce.Helpers.Secrets.ClientId,
+													   secret: eCommerce.Helpers.Secrets.ClientSecret);
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
