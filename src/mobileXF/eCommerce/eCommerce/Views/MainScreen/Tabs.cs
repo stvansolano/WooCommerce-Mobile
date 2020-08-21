@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using eCommerce.ViewModels;
+using eCommerce.Views.SearchScreen;
 using WooCommerceNET.WooCommerce.v3;
 using Xamarin.Forms;
 
@@ -25,7 +27,7 @@ namespace eCommerce.Views.MainScreen
 			if (model is PopularTab)
 				return PopularTemplate;
 
-			if (model is SearchTab)
+			if (model is SearchViewModel)
 				return SearchTemplate;
 
 			return null;

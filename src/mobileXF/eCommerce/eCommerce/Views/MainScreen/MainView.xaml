@@ -7,6 +7,7 @@
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:eCommerce.Controls"
              xmlns:mainScreen="clr-namespace:eCommerce.Views.MainScreen"
+             xmlns:searchScreen="clr-namespace:eCommerce.Views.SearchScreen"    
              xmlns:pancakes="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Margin="{x:OnPlatform Android='0,20,0,0', Default=0}">
     <ContentView.Resources>
@@ -16,6 +17,10 @@
         
         <DataTemplate x:Key="TagTemplateKey">
             <mainScreen:TagView />
+        </DataTemplate>
+
+        <DataTemplate x:Key="SearchTemplateKey">
+            <searchScreen:SearchView />
         </DataTemplate>
     </ContentView.Resources>
     <Grid BackgroundColor="{StaticResource color_black}">
@@ -63,18 +68,14 @@
                                             <BindableLayout.ItemTemplateSelector>
                                                 <mainScreen:TabTemplateSelector
                                                         CategoryTemplate="{StaticResource CategoryTemplateKey}"
-                                                        TagTemplate="{StaticResource TagTemplateKey}">
+                                                        TagTemplate="{StaticResource TagTemplateKey}"
+                                                        SearchTemplate="{StaticResource SearchTemplateKey}">
 
                                                     <mainScreen:TabTemplateSelector.PopularTemplate>
                                                         <DataTemplate>
                                                             <Label Text="{Binding}" Background="Yellow" />
                                                         </DataTemplate>
                                                     </mainScreen:TabTemplateSelector.PopularTemplate>
-                                                    <mainScreen:TabTemplateSelector.SearchTemplate>
-                                                        <DataTemplate>
-                                                            <Label Text="{Binding}" Background="Gray" />
-                                                        </DataTemplate>
-                                                    </mainScreen:TabTemplateSelector.SearchTemplate>
                                                 </mainScreen:TabTemplateSelector>
                                             </BindableLayout.ItemTemplateSelector>
                                         </FlexLayout>

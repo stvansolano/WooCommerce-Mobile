@@ -3,9 +3,9 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 
-namespace eCommerce.Views.MainScreen
+namespace eCommerce.ViewModels
 {
-	public class NavigationItemViewModel : BindableBase
+	public class NavigationItemViewModel : ViewModelBase
 	{
 		public NavigationItemViewModel(object data, INavigationService navigationService)
 		{
@@ -23,7 +23,6 @@ namespace eCommerce.Views.MainScreen
 		}
 
 		public object Data { get; }
-		public INavigationService Navigation { get; }
 		public ICommand GoToDetailCommand { get; }
 	}
 }

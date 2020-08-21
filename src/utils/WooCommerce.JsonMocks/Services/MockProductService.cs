@@ -21,5 +21,12 @@ namespace WooCommerce.Mocks
 
 			return new HttpResponse<Variation[]>(new Variation[0], HttpStatusCode.OK);
 		}
+
+		public async Task<HttpResponse<Product[]>> Search(string criteria)
+		{
+			var mockedCall = await base.GetAsync();
+
+			return mockedCall;
+		}
 	}
 }

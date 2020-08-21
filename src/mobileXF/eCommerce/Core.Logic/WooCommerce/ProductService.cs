@@ -20,5 +20,10 @@ namespace Core.Logic.Services
 		{
 			return Ok(await ApiInstance.GetProductVariations(productId));
 		}
+
+		public async Task<HttpResponse<Product[]>> Search(string criteria)
+		{
+			return Ok(await ApiInstance.SearchProducts(criteria));
+		}
 	}
 }

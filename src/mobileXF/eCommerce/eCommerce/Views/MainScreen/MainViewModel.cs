@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Core.Logic.Http;
+using eCommerce.ViewModels;
 using eCommerce.Views.MainScreen;
+using eCommerce.Views.SearchScreen;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Navigation;
@@ -15,7 +18,6 @@ namespace eCommerce
 	public class MainViewModel : Prism.Mvvm.BindableBase, IInitialize, IInitializeAsync, INavigationAware
 	{
 		public ICommand RefreshCommand { get; set; }
-
 		public INavigationService NavigationService { get; }
 		public IHttpFactory<ProductCategory> CategoryService { get; }
 
@@ -36,6 +38,7 @@ namespace eCommerce
 		public SearchTab Search { get; }
 		public ObservableCollection<Tab> TabItems { get; private set; } = new ObservableCollection<Tab>();
 		public IHttpFactory<ProductTag> TagsService { get; private set; }
+		public SearchViewModel SearchViewModel { get; }
 
 		public MainViewModel(IContainerProvider dependencyProvider, INavigationService navigationService)
 		{
@@ -43,13 +46,16 @@ namespace eCommerce
 
 			CategoryService = dependencyProvider.Resolve<IHttpFactory<ProductCategory>>();
 			TagsService = dependencyProvider.Resolve<IHttpFactory<ProductTag>>();
+			SearchViewModel = dependencyProvider.Resolve<SearchViewModel>();
 
 			RefreshCommand = new DelegateCommand(async () => await RefreshDataAsync());
 
 			TabItems.Add(AllItems = new AllItemsTab { Selected = true });
 			TabItems.Add(AllTags = new AllTagsTab());
-			TabItems.Add(AllPopular = new PopularTab());
+			//TabItems.Add(AllPopular = new PopularTab());
 			TabItems.Add(Search = new SearchTab());
+
+			TabItems.OfType<SearchTab>().FirstOrDefault().Items?.Add(this.SearchViewModel);
 		}
 
 		private async Task RefreshDataAsync()

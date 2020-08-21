@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eCommerce.Views.SearchScreen.SearchView">
+    <StackLayout Orientation="Vertical">
+        <Label Text="{Binding Title}" />
+        <SearchBar Text="{Binding Criteria}" />
+
+        <Button Text="Search" CornerRadius="10" HorizontalOptions="End" Padding="5"
+                BackgroundColor="Gold" TextColor="Black" Command="{Binding SearchCommand}" />
+
+         <CollectionView x:Name="ProductOverview"
+                         ItemsSource="{Binding Results}"
+                         VerticalScrollBarVisibility="Never"
+                         SelectionMode="Single"
+                         ItemTemplate="{DynamicResource DefaultProductTemplate}"
+                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ProductOverview}}"
+                         SelectionChangedCommand="{Binding SelectedItemCommand}">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2"
+                                 VerticalItemSpacing="10"
+                                 HorizontalItemSpacing="20"
+                                 />
+            </CollectionView.ItemsLayout>
+        </CollectionView>
+    </StackLayout>
+</ContentView>

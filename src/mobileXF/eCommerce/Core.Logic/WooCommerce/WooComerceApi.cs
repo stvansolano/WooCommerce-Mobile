@@ -45,6 +45,17 @@ namespace Core.Logic.Services
 			return result.ToArray();
 		}
 
+		public async Task<Product[]> SearchProducts(string criteria)
+		{
+			var obj = GetObject();
+
+			var parameters = new Dictionary<string, string>();
+			parameters.Add("search", criteria);
+			var result = await obj.Product.GetAll(parameters);
+
+			return result.ToArray();
+		}
+
 		public async Task<ProductCategory[]> GetCategories()
 		{
 			var obj = GetObject();

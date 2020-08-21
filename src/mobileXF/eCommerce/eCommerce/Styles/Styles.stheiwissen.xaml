@@ -301,4 +301,32 @@ Link: https://github.com/sthewissen/FocusOnXamarin/blob/master/FocusOnXamarin/Ap
                 <Setter Property="VerticalOptions" Value="Center"/>
                 <Setter Property="HeightRequest" Value="40"/>
             </Style>
+
+            <DataTemplate x:Key="DefaultProductTemplate">
+                <StackLayout>
+                    <pancakes:PancakeView Style="{StaticResource product_card}"
+                                            HeightRequest="240">
+                        <StackLayout>
+
+                            <Image Source="{Binding Data.images[0].src}"
+                                    HorizontalOptions="Center" />
+                            <!--
+                            sharedTransitions:Transition.Name="itemTransition"
+                                    sharedTransitions:Transition.Group="{Binding Name}"
+                                                   
+                            -->
+                            <Label Style="{StaticResource product_card_price}"
+                                    Text="{Binding Data.price, StringFormat='{0:c}' }"
+                                    />
+
+                            <Label Style="{StaticResource product_card_name}"
+                                    Text="{Binding Data.name}"
+                                    VerticalOptions="End"
+                                    VerticalTextAlignment="End"
+                                    />
+
+                        </StackLayout>
+                    </pancakes:PancakeView>
+                </StackLayout>
+            </DataTemplate>
 </ResourceDictionary>

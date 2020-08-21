@@ -11,6 +11,8 @@ using Prism.Ioc;
 
 using WooCommerceNET.WooCommerce.v3;
 using Xamarin.Forms;
+using eCommerce.Views.SearchScreen;
+using Prism.Navigation;
 
 namespace eCommerce
 {
@@ -26,6 +28,7 @@ namespace eCommerce
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
 			containerRegistry.RegisterInstance(Container);
+			containerRegistry.Register<INavigationService, PageNavigationService>();
 			containerRegistry.RegisterServices();
 			containerRegistry.RegisterForNavigation<NavigationPage>();
 
@@ -107,6 +110,9 @@ namespace eCommerce
 
 			// Categories
 			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, ProductCategoryService>();
+
+			// Search
+			containerRegistry.RegisterSingleton<SearchViewModel>();
 		}
 	}
 }

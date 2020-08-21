@@ -13,6 +13,7 @@
                      ItemsSource="{Binding Products}"
                      VerticalScrollBarVisibility="Never"
                      SelectionMode="Single"
+                     ItemTemplate="{DynamicResource DefaultProductTemplate}"
                      SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ProductOverview}}"
                      SelectionChangedCommand="{Binding SelectedItemCommand}">
 
@@ -46,36 +47,6 @@
                             BackgroundColor="Black" RefreshColor="Blue" />
                 </StackLayout>
             </CollectionView.Header>
-
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <pancakes:PancakeView Style="{StaticResource product_card}"
-                                              HeightRequest="240">
-                            <StackLayout>
-
-                                <Image Source="{Binding images[0].src}"
-                                        HorizontalOptions="Center" />
-                                <!--
-                                sharedTransitions:Transition.Name="itemTransition"
-                                        sharedTransitions:Transition.Group="{Binding Name}"
-                                                   
-                                -->
-                                <Label Style="{StaticResource product_card_price}"
-                                       Text="{Binding price, StringFormat='{0:c}' }"
-                                       />
-
-                                <Label Style="{StaticResource product_card_name}"
-                                       Text="{Binding name}"
-                                       VerticalOptions="End"
-                                       VerticalTextAlignment="End"
-                                       />
-
-                            </StackLayout>
-                        </pancakes:PancakeView>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
         </CollectionView>
     </StackLayout>
 </ContentView>

@@ -51,11 +51,11 @@ namespace eCommerce.ViewModels
 
 		public async void OnNavigatedTo(INavigationParameters parameters)
 		{
-			var product = parameters.GetValue<Product>("Product");
+			var product = parameters.GetValue<NavigationItemViewModel>("Product");
 
-			if (product != null && !Variations.Any())
+			if (product?.Data is Product p && !Variations.Any())
 			{
-				Product = product;
+				Product = p;
 				
 				var variationsResult = await ProductService.GetVariations(Product.id.GetValueOrDefault(0));
 

@@ -21,7 +21,7 @@ namespace eCommerce.ViewModels
 		public IProductService ProductService { get; }
 		public ICommand GoBackCommand { get; set; }
 		public ICommand SelectedItemCommand { get; set; }
-		public ObservableCollection<Product> Products { get; set; } = new ObservableCollection<Product>();
+		public ObservableCollection<NavigationItemViewModel> Products { get; set; } = new ObservableCollection<NavigationItemViewModel>();
 
 		private object _parent;
 		public object Parent
@@ -40,7 +40,8 @@ namespace eCommerce.ViewModels
 
 			GoBackCommand = new DelegateCommand(async() => await NavigationService.GoBackAsync());
 
-			SelectedItemCommand = new DelegateCommand<Product>(async selectedItem =>
+			SelectedItemCommand = new DelegateCommand<object>(
+				async selectedItem =>
 			{
 				var parameters = new NavigationParameters();
 				parameters.Add("Product", selectedItem);
@@ -77,13 +78,13 @@ namespace eCommerce.ViewModels
 					if (item.categories.Any(c => c.id == category.id))
 					{
 						Parent = parent;
-						Products.Add(item);
+						Products.Add(new NavigationItemViewModel(item, NavigationService));
 						continue;
 					}
 				}
 				else
 				{
-					Products.Add(item);
+					Products.Add(new NavigationItemViewModel(item, NavigationService));
 				}
 			}
 

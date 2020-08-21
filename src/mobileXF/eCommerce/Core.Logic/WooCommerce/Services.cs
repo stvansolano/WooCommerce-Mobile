@@ -9,6 +9,8 @@ namespace Core.Logic.Services
 		Task<HttpResponse<Product[]>> GetByCategoryId(int categoryId);
 
 		Task<HttpResponse<Variation[]>> GetVariations(int productId);
+
+		Task<HttpResponse<Product[]>> Search(string criteria);
 	}
 
 	public class ProductCategoryService : WooCommerceFactory<ProductCategory>

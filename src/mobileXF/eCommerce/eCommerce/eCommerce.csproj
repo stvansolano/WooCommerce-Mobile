@@ -38,6 +38,7 @@
     <Folder Include="Controls\" />
     <Folder Include="Views\MainScreen\" />
     <Folder Include="Views\ProductListing\" />
+    <Folder Include="Views\SearchScreen\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Fonts\IcoMoon-Free.ttf" />
