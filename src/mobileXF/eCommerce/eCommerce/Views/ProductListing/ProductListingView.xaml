@@ -1,21 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:pancakes="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              x:Class="eCommerce.Views.ProductListing.ProductListingView">
 
-    <StackLayout Orientation="Vertical">
-        <Button Style="{StaticResource menu_button}"
-                Command="{Binding GoBackCommand}"
-                Text="arrow-left2" />
+     <StackLayout Padding="{x:OnPlatform Android='10,24', Default='20,60'}"
+                  Orientation="Vertical">
      
         <CollectionView x:Name="ProductOverview"
-                     ItemsSource="{Binding Products}"
-                     VerticalScrollBarVisibility="Never"
-                     SelectionMode="Single"
-                     ItemTemplate="{DynamicResource DefaultProductTemplate}"
-                     SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ProductOverview}}"
-                     SelectionChangedCommand="{Binding SelectedItemCommand}">
+                        ItemsSource="{Binding Products}"
+                        VerticalScrollBarVisibility="Never"
+                        SelectionMode="Single"
+                        ItemTemplate="{DynamicResource DefaultProductTemplate}"
+                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ProductOverview}}"
+                        SelectionChangedCommand="{Binding SelectedItemCommand}">
 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" Span="2"
@@ -27,24 +24,20 @@
             <CollectionView.Header>
                 <StackLayout Orientation="Vertical"
                              Margin="50,20,0,0">
-                    <Button Style="{StaticResource menu_button}"
-                            Command="{Binding GoBackCommand}"
-                            HorizontalOptions="Start"
-                            Margin="20,0"
-                            Text="arrow-left2" />
 
-                       <Label FontSize="Large"
-                              LineBreakMode="TailTruncation"
-                              TextColor="{DynamicResource mainLabel}"
-                              FontFamily="{StaticResource InterBold}"
-                              Margin="20, 0"
-                              Text="{Binding Parent.name}"
-                              />
+                <StackLayout Orientation="Horizontal">
 
-                    <RefreshView IsRefreshing="True"
+                    <Button Style="{DynamicResource back_button}" />
+
+                    <Label Style="{StaticResource product_detail_name}"
+                           Margin="5,0,0,0"
+                           Text="{Binding Parent.name}" />
+
+                </StackLayout>
+                    <!--<RefreshView IsRefreshing="True"
                             Margin="20,0" Background="Blue"
                             Command="{Binding RefreshCommand}"
-                            BackgroundColor="Black" RefreshColor="Blue" />
+                            BackgroundColor="Black" RefreshColor="Blue" />-->
                 </StackLayout>
             </CollectionView.Header>
         </CollectionView>

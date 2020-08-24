@@ -11,12 +11,12 @@
                  >
        <AbsoluteLayout VerticalOptions="FillAndExpand">
             <pancakes:PancakeView HasShadow="True"
-                            x:Name="container"
-                            Elevation="8"
-                            BackgroundColor="{DynamicResource background}"
-                            CornerRadius="10">
-      
-            </pancakes:PancakeView>
+                                  x:Name="container"
+                                  Elevation="8"
+                                  BackgroundColor="{DynamicResource background}"
+                                  CornerRadius="10"
+                                  />
+
             <pancakes:PancakeView x:Name="imgContainer"
                                 CornerRadius="10">
                  <Image Source="{Binding Data.image.src}"

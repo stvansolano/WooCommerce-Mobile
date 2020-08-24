@@ -39,27 +39,27 @@
     <Folder Include="Views\MainScreen\" />
     <Folder Include="Views\ProductListing\" />
     <Folder Include="Views\SearchScreen\" />
+    <Folder Include="Fonts\" />
+    <Folder Include="Fonts\Glyphs\" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Fonts\IcoMoon-Free.ttf" />
-    <None Remove="Fonts\Palanquin-Regular.ttf" />
-    <None Remove="Fonts\Palanquin-Light.ttf" />
-    <None Remove="Fonts\Palanquin-Bold.ttf" />
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Fonts\FontAwesome5BrandsRegular.otf" />
+    <EmbeddedResource Include="Fonts\FontAwesome5Regular.otf" />
+    <EmbeddedResource Include="Fonts\FontAwesome5Solid.otf" />
     <EmbeddedResource Include="Fonts\IcoMoon-Free.ttf" />
-    <EmbeddedResource Include="Fonts\Palanquin-Regular.ttf" />
-    <EmbeddedResource Include="Fonts\Palanquin-Light.ttf" />
+    <EmbeddedResource Include="Fonts\InterBold.ttf" />
+    <EmbeddedResource Include="Fonts\InterLight.ttf" />
+    <EmbeddedResource Include="Fonts\InterMedium.ttf" />
     <EmbeddedResource Include="Fonts\Palanquin-Bold.ttf" />
-        
+    <EmbeddedResource Include="Fonts\Palanquin-Light.ttf" />
+    <EmbeddedResource Include="Fonts\Palanquin-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Update="MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
     
-  <ItemGroup>
-    <None Remove="Fonts\Palanquin-Bold.ttf" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\ProductListing\ProductDetailView.xaml.cs">
       <DependentUpon>..\MainView.xaml</DependentUpon>
@@ -69,5 +69,17 @@
   <ItemGroup>
     <ProjectReference Include="..\Core.Logic\Core.Logic.csproj" />
     <ProjectReference Include="..\..\..\utils\WooCommerce.JsonMocks\WooCommerce.Mocks.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Fonts\FontAwesome5BrandsRegular.otf" />
+    <None Remove="Fonts\FontAwesome5Regular.otf" />
+    <None Remove="Fonts\FontAwesome5Solid.otf" />
+    <None Remove="Fonts\IcoMoon-Free.ttf" />
+    <None Remove="Fonts\InterBold.ttf" />
+    <None Remove="Fonts\InterLight.ttf" />
+    <None Remove="Fonts\InterMedium.ttf" />
+    <None Remove="Fonts\Palanquin-Bold.ttf" />
+    <None Remove="Fonts\Palanquin-Light.ttf" />
+    <None Remove="Fonts\Palanquin-Regular.ttf" />
   </ItemGroup>
 </Project>

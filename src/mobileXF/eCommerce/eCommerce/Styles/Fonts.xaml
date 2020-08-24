@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    >
+    <!--Fonts-->
+    <OnPlatform x:TypeArguments="x:String" x:Key="IcoMoonFree">
+        <On Platform="iOS" Value="IcoMoon-Free"/>
+        <On Platform="Android" Value="Fonts/IcoMoon-Free.ttf#Regular"/>
+    </OnPlatform>
+
+    <OnPlatform x:TypeArguments="x:String" x:Key="PalanquinLight">
+        <On Platform="iOS" Value="Fonts/Palanquin-Light"/>
+        <On Platform="Android" Value="Fonts/Palanquin-Light.ttf#Regular"/>
+    </OnPlatform>
+
+    <OnPlatform x:TypeArguments="x:String" x:Key="PalanquinRegular">
+        <On Platform="iOS" Value="Fonts/Palanquin-Regular"/>
+        <On Platform="Android" Value="Fonts/Palanquin-Regular.ttf#Regular"/>
+    </OnPlatform>
+
+    <OnPlatform x:TypeArguments="x:String" x:Key="PalanquinBold">
+        <On Platform="iOS" Value="Fonts/Palanquin-Bold"/>
+        <On Platform="Android" Value="Fonts/Palanquin-Bold.ttf#Bold"/>
+    </OnPlatform>
+
+    <!-- FontAwesome -->
+    <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeBrands">
+        <On Platform="Android" 
+            Value="Fonts/FontAwesome5Brands.otf#Regular" />
+        <On Platform="iOS" 
+            Value="Fonts/FontAwesome5Brands-Regular" />
+    </OnPlatform> 
+    
+    <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeSolid"> 
+        <On Platform="Android" 
+            Value="Fonts/FontAwesome5Solid.otf#Regular" /> 
+        <On Platform="iOS" 
+            Value="Fonts/FontAwesome5Free-Solid" /> 
+    </OnPlatform> 
+    
+    <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeRegular">
+        <On Platform="Android" 
+            Value="Fonts/FontAwesome5Regular.otf#Regular" /> 
+        <On Platform="iOS" 
+            Value="Fonts/FontAwesome5Free-Regular" /> 
+    </OnPlatform>
+        <OnPlatform x:TypeArguments="x:String" 
+                    x:Key="InterMedium">
+        <On Platform="Android" 
+            Value="Fonts/InterMedium.ttf#Medium" /> 
+        <On Platform="iOS" 
+            Value="Fonts/Inter-Medium" /> 
+    </OnPlatform>
+
+    <OnPlatform x:TypeArguments="x:String" 
+                x:Key="InterBold">
+        <On Platform="Android" 
+            Value="Fonts/InterBold.ttf#Bold" /> 
+        <On Platform="iOS" 
+            Value="Fonts/Inter-Bold" /> 
+    </OnPlatform>
+
+    <OnPlatform x:TypeArguments="x:String" 
+                x:Key="InterLight"> 
+        <On Platform="Android" 
+            Value="Fonts/InterLight.ttf#Light" /> 
+        <On Platform="iOS" 
+            Value="Fonts/Inter-Light" /> 
+    </OnPlatform>
+</ResourceDictionary>

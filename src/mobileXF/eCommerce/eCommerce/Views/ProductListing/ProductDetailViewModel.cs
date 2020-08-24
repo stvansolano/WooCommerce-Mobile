@@ -27,6 +27,8 @@ namespace eCommerce.ViewModels
 		public INavigationService NavigationService { get; }
 		public ICommand GoBackCommand { get; set; }
 		public ObservableCollection<Variation> Variations { get; private set; } = new ObservableCollection<Variation>();
+		public bool HasVariations { get => Variations.Any(); }
+
 		public IProductService ProductService { get; private set; }
 
 		private Product _product;
@@ -65,6 +67,8 @@ namespace eCommerce.ViewModels
 				{
 					Variations.Add(item);
 				}
+
+				RaisePropertyChanged(nameof(HasVariations));
 			}
 		}
 	}

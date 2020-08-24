@@ -70,7 +70,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -113,6 +112,7 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -135,13 +135,5 @@
       <Project>{C21DD38D-2712-46D0-850D-3B5608FA62C1}</Project>
       <Name>eCommerce</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\FontAwesome5BrandsRegular.otf" />
-    <BundleResource Include="Resources\FontAwesome5Regular.otf" />
-    <BundleResource Include="Resources\FontAwesome5Solid.otf" />
-    <BundleResource Include="Resources\InterBold.ttf" />
-    <BundleResource Include="Resources\InterLight.ttf" />
-    <BundleResource Include="Resources\InterMedium.ttf" />
   </ItemGroup>
 </Project>

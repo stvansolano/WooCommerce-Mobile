@@ -9,7 +9,7 @@
              xmlns:mainScreen="clr-namespace:eCommerce.Views.MainScreen"
              xmlns:searchScreen="clr-namespace:eCommerce.Views.SearchScreen"    
              xmlns:pancakes="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             Margin="{x:OnPlatform Android='0,20,0,0', Default=0}">
+             Margin="0">
     <ContentView.Resources>
         <DataTemplate x:Key="CategoryTemplateKey">
             <mainScreen:CategoryView />
@@ -29,7 +29,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <pancakes:PancakeView x:Name="GridRow1" CornerRadius="32">
+        <pancakes:PancakeView x:Name="GridRow1" CornerRadius="{x:OnPlatform Android='0,0,32,32', Default=0}">
 
             <Grid Style="{StaticResource page_wrapper}">
 
