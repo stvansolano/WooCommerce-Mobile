@@ -33,41 +33,55 @@ Credits to: @sthewissen
                            Text="{Binding Product.name}" />
 
                 </StackLayout>
-                
-                <Image Style="{StaticResource product_detail_image}"
-                       Source="{Binding Product.images[0].src}" />
 
-                <Label Text="{Binding Product.WeightInGrams, StringFormat='{0}g'}"
-                        Style="{StaticResource product_card_weight}" />
+                <StackLayout Orientation="Horizontal">
 
-                <CarouselView ItemsSource="{Binding Variations}"
-                              HeightRequest="100"
-                              IsVisible="{Binding HasVariations}">
-                    <CarouselView.ItemTemplate>
+                    <FlexLayout BindableLayout.ItemsSource="{Binding Variations}"
+                                Direction="Column"
+                                Margin="3,10,3,0"
+                                Wrap="NoWrap"
+                                HeightRequest="100"
+                                IsVisible="{Binding HasVariations}">
+                    <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <Grid Margin="2.5">
                                 <Image Source="{Binding image.src}" />
                                 <Label Text="{Binding name}" IsVisible="False" />
                             </Grid>
                         </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
+                    </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                    <Image Style="{StaticResource product_detail_image}"
+                           Margin="0,10,0,0"
+                           Source="{Binding Product.images[0].src}" />
+
+                </StackLayout>
+                <Label Text="{Binding Product.WeightInGrams, StringFormat='{0}g'}"
+                        Style="{StaticResource product_card_weight}" />
                 
                 <StackLayout Margin="0,32" Orientation="Horizontal">
 
                     <Frame Style="{StaticResource quantity_picker_container}" >
                         <Grid VerticalOptions="Start">
-                            <Button Style="{StaticResource quantity_picker_button}" Grid.Column="0" Text="minus" />
+                            <Button Style="{StaticResource quantity_picker_button}"
+                                    Grid.Column="0" Text="minus"
+                                    Command="{Binding DecreaseQuantityCommand}"
+                                    />
 
                             <Label Style="{StaticResource quantity_picker_value}" Grid.Column="1"
-                                    Text="{Binding Product.Quantity}" />
+                                   Text="{Binding OrderedQuantity}" />
 
-                            <Button Style="{StaticResource quantity_picker_button}" Grid.Column="2" Text="plus" />
+                            <Button Style="{StaticResource quantity_picker_button}"
+                                    Command="{Binding IncreaseQuantityCommand}"
+                                    Grid.Column="2"
+                                    Text="plus"
+                                    />
                         </Grid>
                     </Frame>
 
                     <Label Style="{StaticResource product_detail_price}"
-                            Text="{Binding Product.Price, StringFormat='{0:c}'}" />
+                           Text="{Binding Product.price, StringFormat='{0:c}'}"
+                           VerticalTextAlignment="Center"/>
                 </StackLayout>
 
                 <Label Style="{StaticResource SubTitle}" Text="About the product" />

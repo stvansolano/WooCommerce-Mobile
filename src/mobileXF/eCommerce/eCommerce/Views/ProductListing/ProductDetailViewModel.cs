@@ -22,12 +22,25 @@ namespace eCommerce.ViewModels
 			ProductService = dependencyProvider.Resolve<IProductService>();
 
 			GoBackCommand = new DelegateCommand(async () => await NavigationService.GoBackAsync());
+
+			IncreaseQuantityCommand = new DelegateCommand(() => {
+				OrderedQuantity++;
+			});
+
+			DecreaseQuantityCommand = new DelegateCommand(() => {
+				OrderedQuantity--;
+			}, () => OrderedQuantity > 0)
+				.ObservesProperty(() => OrderedQuantity);
 		}
 
 		public INavigationService NavigationService { get; }
-		public ICommand GoBackCommand { get; set; }
-		public ObservableCollection<Variation> Variations { get; private set; } = new ObservableCollection<Variation>();
+
 		public bool HasVariations { get => Variations.Any(); }
+		public ObservableCollection<Variation> Variations { get; private set; } = new ObservableCollection<Variation>();
+
+		public ICommand GoBackCommand { get; set; }
+		public ICommand DecreaseQuantityCommand { get; set; }
+		public ICommand IncreaseQuantityCommand { get; set; }
 
 		public IProductService ProductService { get; private set; }
 
@@ -39,6 +52,18 @@ namespace eCommerce.ViewModels
 			{
 				_product = value;
 				RaisePropertyChanged(nameof(Product));
+			}
+		}
+
+
+		private int _OrderedQuantity;
+		public int OrderedQuantity
+		{
+			get => _OrderedQuantity;
+			set
+			{
+				_OrderedQuantity = value;
+				RaisePropertyChanged(nameof(OrderedQuantity));
 			}
 		}
 
