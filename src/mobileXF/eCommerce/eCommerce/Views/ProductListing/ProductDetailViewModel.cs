@@ -31,6 +31,8 @@ namespace eCommerce.ViewModels
 				OrderedQuantity--;
 			}, () => OrderedQuantity > 0)
 				.ObservesProperty(() => OrderedQuantity);
+
+			AddToCartCommand = new DelegateCommand(() => { });
 		}
 
 		public INavigationService NavigationService { get; }
@@ -42,6 +44,8 @@ namespace eCommerce.ViewModels
 		public ICommand DecreaseQuantityCommand { get; set; }
 		public ICommand IncreaseQuantityCommand { get; set; }
 
+		public ICommand AddToCartCommand { get; set; }
+		
 		public IProductService ProductService { get; private set; }
 
 		private Product _product;
