@@ -9,7 +9,7 @@
 Credits to: @sthewissen
 -->
 
-     <Grid Padding="{x:OnPlatform Android='10,24', Default='20,60'}" ColumnSpacing="32">
+     <Grid Padding="{StaticResource ParentContainerPadding}" ColumnSpacing="32">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -25,18 +25,17 @@ Credits to: @sthewissen
             <StackLayout>
                 <StackLayout Orientation="Horizontal">
 
-                    <Button Style="{StaticResource back_button}"
+                    <Button Style="{StaticResource BackButton}"
                             ImageSource="{DynamicResource Icon_Back}"
                             />
 
-                    <Label Style="{StaticResource product_detail_name}"
-                           Margin="5,0,0,0"
+                    <Label Style="{StaticResource Header}"
                            Text="{Binding Product.name}" />
 
                 </StackLayout>
                 
-                <Image Margin="10,20" Style="{StaticResource product_detail_image}"
-                        Source="{Binding Product.images[0].src}" />
+                <Image Style="{StaticResource product_detail_image}"
+                       Source="{Binding Product.images[0].src}" />
 
                 <Label Text="{Binding Product.WeightInGrams, StringFormat='{0}g'}"
                         Style="{StaticResource product_card_weight}" />
@@ -71,7 +70,7 @@ Credits to: @sthewissen
                             Text="{Binding Product.Price, StringFormat='{0:c}'}" />
                 </StackLayout>
 
-                <Label Style="{StaticResource product_detail_subheading}" Text="About the product" />
+                <Label Style="{StaticResource SubTitle}" Text="About the product" />
                 <Label Text="{Binding Product.description}" TextType="Html" />
             </StackLayout>
         </ScrollView>

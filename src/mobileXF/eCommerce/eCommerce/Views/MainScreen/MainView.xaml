@@ -31,15 +31,18 @@
 
         <pancakes:PancakeView x:Name="GridRow1" CornerRadius="{x:OnPlatform Android='0,0,32,32', Default=0}">
 
-            <Grid Style="{StaticResource page_wrapper}">
+            <Grid Style="{StaticResource page_wrapper}"
+                  Padding="{StaticResource ParentContainerPadding}">
 
                 <Grid.RowDefinitions>
                     <RowDefinition x:Name="MenuBarRow1" Height="54" />
                     <RowDefinition x:Name="MenuBarRow2" Height="*" />
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" x:Name="MenuBarTitle" Text="Local Delicacies"
-                       Style="{StaticResource title_label}" VerticalOptions="Center"/>
+                <Label Grid.Row="0" x:Name="MenuBarTitle" Style="{StaticResource Header}"
+                       Text="{StaticResource MainTitle}"
+                       VerticalOptions="Center"
+                       />
                 <Button Grid.Row="0" x:Name="MenuBarIcon" Text="equalizer2" Style="{StaticResource menu_button}" HorizontalOptions="End" />
 
                 <Grid Grid.Row="1">
@@ -109,7 +112,7 @@
             </Grid.RowDefinitions>
 
             <StackLayout x:Name="CartSmall" Orientation="Horizontal" Grid.Row="0" Spacing="8" HeightRequest="74">
-                <Label Style="{StaticResource small_cart_header}" Text="Cart" />
+                <Label Style="{StaticResource small_cart_header}" Text="{StaticResource ShoppingCart}" />
                 <StackLayout Orientation="Horizontal" Spacing="8" BindableLayout.ItemsSource="{Binding CartContents}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
@@ -125,7 +128,11 @@
                 </Frame>
             </StackLayout>
 
-            <Label x:Name="CartLarge" Style="{StaticResource cart_title}" Grid.Row="1" Text="Cart" />
+            <Label x:Name="CartLarge"
+                   Style="{StaticResource cart_title}"
+                   Grid.Row="1"
+                   Text="{StaticResource ShoppingCart}"
+                   />
 
             <CollectionView ItemsSource="{Binding CartContents}" Grid.Row="2">
 

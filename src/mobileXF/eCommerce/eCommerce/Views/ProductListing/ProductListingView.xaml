@@ -27,7 +27,7 @@
 
                 <StackLayout Orientation="Horizontal">
 
-                    <Button Style="{DynamicResource back_button}" />
+                    <Button Style="{DynamicResource BackButton}" />
 
                     <Label Style="{StaticResource product_detail_name}"
                            Margin="5,0,0,0"

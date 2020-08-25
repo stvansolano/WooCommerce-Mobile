@@ -60,15 +60,7 @@ Link: https://github.com/sthewissen/FocusOnXamarin/blob/master/FocusOnXamarin/Ap
     </Style>
 
     <Style x:Key="page_wrapper" TargetType="Grid">
-        <Setter Property="BackgroundColor" Value="{StaticResource color_crema}"/>
-        <Setter Property="Padding">
-            <Setter.Value>
-                <OnPlatform x:TypeArguments="Thickness">
-                    <On Platform="iOS">20,40,20,0</On>
-                    <On Platform="Android">20,0,20,0</On>
-                </OnPlatform>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="BackgroundColor" Value="{StaticResource color_crema}" />
     </Style>
 
     <Style x:Key="product_card" TargetType="pancakes:PancakeView">
@@ -234,7 +226,6 @@ Link: https://github.com/sthewissen/FocusOnXamarin/blob/master/FocusOnXamarin/Ap
     <Style x:Key="product_detail_name" TargetType="Label">
         <Setter Property="FontFamily" Value="{StaticResource PalanquinBold}"/>
         <Setter Property="FontSize" Value="32"/>
-        <Setter Property="MaxLines" Value="2"/>
     </Style>
 
     <Style x:Key="product_detail_image" TargetType="Image">

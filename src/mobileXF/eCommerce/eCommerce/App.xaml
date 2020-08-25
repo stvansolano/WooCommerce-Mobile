@@ -8,22 +8,27 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:pancakes="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              >
-    <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles/Fonts.xaml" />                
-                <ResourceDictionary Source="Styles/Styles.stheiwissen.xaml" />
-                <ResourceDictionary Source="Styles/Styles.valentineg8.xaml" />
+<Application.Resources>
+    <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="Styles/Fonts.xaml" />                
+            <ResourceDictionary Source="Styles/Styles.stheiwissen.xaml" />
+            <ResourceDictionary Source="Styles/Styles.valentineg8.xaml" />
                 
-                <ResourceDictionary Source="Styles/Icons.xaml" />                
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+            <ResourceDictionary Source="Styles/Icons.xaml" />                
+        </ResourceDictionary.MergedDictionaries>
 
-        <Style x:Key="back_button"
-               TargetType="Button"
-               BaseResourceKey="menu_button">
+        <!-- Configurable -->
+        <x:String x:Key="MainTitle">My shop</x:String>
+        <x:String x:Key="ShoppingCart">Shopping cart</x:String>
+
+
+        <Style x:Key="BackButton"
+                TargetType="Button"
+                BaseResourceKey="menu_button">
 
             <Setter Property="Command" Value="{Binding GoBackCommand}" />
+            <Setter Property="Margin" Value="0,0,5,0" />
             <Setter Property="ImageSource" Value="{StaticResource Icon_Back}" />
         </Style>
 
@@ -31,7 +36,7 @@
         <DataTemplate x:Key="DefaultProductTemplate">
             <StackLayout>
                 <pancakes:PancakeView Style="{StaticResource product_card}"
-                                      HeightRequest="300">
+                                        HeightRequest="{x:OnPlatform Android=300, iOS=220}">
                     <StackLayout>
 
                         <Image Source="{Binding Data.images[0].src}"
@@ -55,5 +60,6 @@
                 </pancakes:PancakeView>
             </StackLayout>
         </DataTemplate>
-    </Application.Resources>
+    </ResourceDictionary>
+</Application.Resources>
 </prism:PrismApplication>
