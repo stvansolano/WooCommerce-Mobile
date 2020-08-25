@@ -13,6 +13,7 @@ using WooCommerceNET.WooCommerce.v3;
 using Xamarin.Forms;
 using eCommerce.Views.SearchScreen;
 using Prism.Navigation;
+using eCommerce.Views.ShoppingCart;
 
 namespace eCommerce
 {
@@ -113,6 +114,9 @@ namespace eCommerce
 
 			// Search
 			containerRegistry.RegisterSingleton<SearchViewModel>();
+
+			// Shopping Cart
+			containerRegistry.RegisterSingleton<ShoppingCartViewModel>();
 		}
 	}
 }

@@ -7,6 +7,7 @@ using Core.Logic.Http;
 using eCommerce.ViewModels;
 using eCommerce.Views.MainScreen;
 using eCommerce.Views.SearchScreen;
+using eCommerce.Views.ShoppingCart;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Navigation;
@@ -38,7 +39,9 @@ namespace eCommerce
 		public SearchTab Search { get; }
 		public ObservableCollection<Tab> TabItems { get; private set; } = new ObservableCollection<Tab>();
 		public IHttpFactory<ProductTag> TagsService { get; private set; }
+
 		public SearchViewModel SearchViewModel { get; }
+		public ShoppingCartViewModel ShoppingCart { get; }
 
 		public MainViewModel(IContainerProvider dependencyProvider, INavigationService navigationService)
 		{
@@ -47,6 +50,7 @@ namespace eCommerce
 			CategoryService = dependencyProvider.Resolve<IHttpFactory<ProductCategory>>();
 			TagsService = dependencyProvider.Resolve<IHttpFactory<ProductTag>>();
 			SearchViewModel = dependencyProvider.Resolve<SearchViewModel>();
+			ShoppingCart = dependencyProvider.Resolve<ShoppingCartViewModel>();
 
 			RefreshCommand = new DelegateCommand(async () => await RefreshDataAsync());
 

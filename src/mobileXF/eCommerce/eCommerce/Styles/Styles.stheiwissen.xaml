@@ -192,7 +192,7 @@ Link: https://github.com/sthewissen/FocusOnXamarin/blob/master/FocusOnXamarin/Ap
         <Setter Property="TextColor" Value="{StaticResource color_white}"/>
         <Setter Property="VerticalTextAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="{StaticResource PalanquinRegular}"/>
-        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontSize" Value="26"/>
         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
 

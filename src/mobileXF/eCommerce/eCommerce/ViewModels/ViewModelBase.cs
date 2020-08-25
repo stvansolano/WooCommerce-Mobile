@@ -1,10 +1,14 @@
 ﻿using System.Diagnostics;
+using System.Threading.Tasks;
 using Prism.Mvvm;
 using Prism.Navigation;
 
 namespace eCommerce.ViewModels
 {
-	public class ViewModelBase : BindableBase
+	public class ViewModelBase : BindableBase,
+								 IInitialize, IInitializeAsync,
+								 INavigationAware
+
 	{
 		private INavigationService _navigation;
 
@@ -17,5 +21,16 @@ namespace eCommerce.ViewModels
 			}
 			protected set => _navigation = value;
 		}
+
+		public virtual void OnNavigatedFrom(INavigationParameters parameters) { }
+
+		public virtual void Initialize(INavigationParameters parameters) { }
+
+		public virtual Task InitializeAsync(INavigationParameters parameters)
+		{
+			return Task.CompletedTask;
+		}
+
+		public virtual void OnNavigatedTo(INavigationParameters parameters) { }
 	}
 }

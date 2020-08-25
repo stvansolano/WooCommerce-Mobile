@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Core.Logic.Http;
 using Core.Logic.Services;
+using eCommerce.Views.ShoppingCart;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Navigation;
@@ -13,15 +14,14 @@ using WooCommerceNET.WooCommerce.v3;
 
 namespace eCommerce.ViewModels
 {
-	public class ProductListingViewModel : Prism.Mvvm.BindableBase,
-										   IInitialize, IInitializeAsync,
-										   INavigationAware
+	public class ProductListingViewModel : ViewModelBase
 	{
-		public INavigationService NavigationService { get; }
 		public IProductService ProductService { get; }
 		public ICommand GoBackCommand { get; set; }
 		public ICommand SelectedItemCommand { get; set; }
-		public ObservableCollection<NavigationItemViewModel> Products { get; set; } = new ObservableCollection<NavigationItemViewModel>();
+
+		public ObservableCollection<ProductViewModel> Products { get; set; } = new ObservableCollection<ProductViewModel>();
+		public ShoppingCartViewModel ShoppingCart { get; }
 
 		private object _parent;
 		public object Parent
@@ -35,32 +35,45 @@ namespace eCommerce.ViewModels
 		}
 		public ProductListingViewModel(IContainerProvider dependencyProvider, INavigationService navigationService)
 		{
-			NavigationService = navigationService;
+			Navigation = navigationService;
 			ProductService = dependencyProvider.Resolve<IProductService>();
+			ShoppingCart = dependencyProvider.Resolve<ShoppingCartViewModel>();
 
-			GoBackCommand = new DelegateCommand(async() => await NavigationService.GoBackAsync());
+			GoBackCommand = new DelegateCommand(async() => await Navigation.GoBackAsync());
 
-			SelectedItemCommand = new DelegateCommand<object>(
+			SelectedItemCommand = new DelegateCommand<ProductViewModel>(
 				async selectedItem =>
 			{
 				var parameters = new NavigationParameters();
 				parameters.Add("Product", selectedItem);
+				parameters.Add("QuantityInCart", GetQuantityInCart(selectedItem));
 
-				await NavigationService.NavigateAsync("ProductDetail", parameters);
+				await Navigation.NavigateAsync("ProductDetail", parameters);
 			});
 		}
 
-		public void Initialize(INavigationParameters parameters) { }
-
-		public Task InitializeAsync(INavigationParameters parameters)
+		private int GetQuantityInCart(ProductViewModel selectedItem)
 		{
-			return Task.CompletedTask;
+			if (selectedItem == null)
+			{
+				return 0;
+			}
+			foreach (var item in ShoppingCart.CartContents)
+			{
+				if (item.Sku == selectedItem.Sku)
+				{
+					return item.Quantity;
+				}
+			}
+			return 0;
 		}
 
-		public void OnNavigatedFrom(INavigationParameters parameters) { }
-
-		public async void OnNavigatedTo(INavigationParameters parameters)
+		public override async void OnNavigatedTo(INavigationParameters parameters)
 		{
+			if (Parent != null)
+			{
+				return;
+			}
 			var parent = parameters.GetValue<object>("Parent");
 
 			var asyncTask = FilterResults(parent);
@@ -78,13 +91,13 @@ namespace eCommerce.ViewModels
 					if (item.categories.Any(c => c.id == category.id))
 					{
 						Parent = parent;
-						Products.Add(new NavigationItemViewModel(item, NavigationService));
+						Products.Add(new ProductViewModel(item, Navigation));
 						continue;
 					}
 				}
 				else
 				{
-					Products.Add(new NavigationItemViewModel(item, NavigationService));
+					Products.Add(new ProductViewModel(item, Navigation));
 				}
 			}
 

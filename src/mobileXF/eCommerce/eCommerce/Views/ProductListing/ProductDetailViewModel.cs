@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Core.Logic.Services;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Ioc;
 using Prism.Navigation;
 
@@ -11,15 +11,15 @@ using WooCommerceNET.WooCommerce.v3;
 
 namespace eCommerce.ViewModels
 {
-	public class ProductDetailViewModel : Prism.Mvvm.BindableBase,
-							IInitialize, IInitializeAsync,
-							INavigationAware
+	public class ProductDetailViewModel : ViewModelBase
 	{
-
-		public ProductDetailViewModel(IContainerProvider dependencyProvider, INavigationService navigationService)
+		public ProductDetailViewModel(IContainerProvider dependencyProvider,
+									 INavigationService navigationService,
+									 IEventAggregator eventAggregator)
 		{
 			NavigationService = navigationService;
 			ProductService = dependencyProvider.Resolve<IProductService>();
+			EventAggregator = eventAggregator;
 
 			GoBackCommand = new DelegateCommand(async () => await NavigationService.GoBackAsync());
 
@@ -29,10 +29,25 @@ namespace eCommerce.ViewModels
 
 			DecreaseQuantityCommand = new DelegateCommand(() => {
 				OrderedQuantity--;
-			}, () => OrderedQuantity > 0)
+			},
+				() => OrderedQuantity > 0)
 				.ObservesProperty(() => OrderedQuantity);
 
-			AddToCartCommand = new DelegateCommand(() => { });
+			AddToCartCommand = new DelegateCommand(() => {
+				AddToCartText = UPDATE_CART;
+
+				EventAggregator.GetEvent<AddToCartEvent>().Publish(new AddToCartEventArgs(Product, OrderedQuantity));
+			});
+		}
+
+		public override void Initialize(INavigationParameters parameters)
+		{
+			base.Initialize(parameters);
+
+			QuantityInCart = parameters.GetValue<int>("QuantityInCart");
+			OrderedQuantity = QuantityInCart == 0 ? 1 : QuantityInCart;
+
+			AddToCartText = QuantityInCart == 0 ? ADD_TO_CART : UPDATE_CART;
 		}
 
 		public INavigationService NavigationService { get; }
@@ -45,8 +60,20 @@ namespace eCommerce.ViewModels
 		public ICommand IncreaseQuantityCommand { get; set; }
 
 		public ICommand AddToCartCommand { get; set; }
-		
+
 		public IProductService ProductService { get; private set; }
+		public IEventAggregator EventAggregator { get; }
+
+		private string _addToCartText;
+		public string AddToCartText
+		{
+			get => _addToCartText;
+			set
+			{
+				_addToCartText = value;
+				RaisePropertyChanged(nameof(AddToCartText));
+			}
+		}
 
 		private Product _product;
 		public Product Product
@@ -59,28 +86,23 @@ namespace eCommerce.ViewModels
 			}
 		}
 
+		public int QuantityInCart { get; private set; }
 
-		private int _OrderedQuantity;
+		private int _orderedQuantity;
 		public int OrderedQuantity
 		{
-			get => _OrderedQuantity;
+			get => _orderedQuantity;
 			set
 			{
-				_OrderedQuantity = value;
+				_orderedQuantity = value;
 				RaisePropertyChanged(nameof(OrderedQuantity));
 			}
 		}
 
-		public void Initialize(INavigationParameters parameters){ }
+		public const string ADD_TO_CART = "Add to cart";
+		public const string UPDATE_CART = "Update cart";
 
-		public Task InitializeAsync(INavigationParameters parameters)
-		{
-			return Task.CompletedTask;
-		}
-
-		public void OnNavigatedFrom(INavigationParameters parameters){ }
-
-		public async void OnNavigatedTo(INavigationParameters parameters)
+		public override async void OnNavigatedTo(INavigationParameters parameters)
 		{
 			var product = parameters.GetValue<NavigationItemViewModel>("Product");
 

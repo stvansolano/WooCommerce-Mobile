@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eCommerce.Views.ShoppingCart.ShoppingCartView">
+
+        <CollectionView ItemsSource="{Binding CartContents}">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="24" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Frame Style="{StaticResource small_cart_image_container}" HorizontalOptions="Start">
+                            <Image Style="{StaticResource small_cart_image}" Source="{Binding ImageUrl}" />
+                        </Frame>
+
+                        <Label Style="{StaticResource cart_line}" Grid.Column="1" Margin="16,0,8,0"
+                                Text="{Binding Quantity, StringFormat='{0}   x'}" />
+
+                        <Label Style="{StaticResource cart_line}" Grid.Column="2"
+                                Text="{Binding Data.name}" />
+
+                        <Label Style="{StaticResource cart_line_price}" Grid.Column="3"
+                                Text="{Binding Data.price, StringFormat='{0:c}'}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.Footer>
+                <Grid ColumnSpacing="8" Padding="0,32,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Frame Style="{StaticResource cart_delivery_icon_container}" >
+                        <Label Text="truck" Style="{StaticResource cart_delivery_icon}" />
+                    </Frame>
+
+                    <Label Style="{StaticResource cart_line}" Grid.Column="1" Margin="16,0,8,0" Text="Delivery" />
+                    <Label Style="{StaticResource cart_line_price}" Grid.Column="2" Text="Free" />
+
+                    <Label Style="{StaticResource cart_delivery_description}" Grid.Column="1" Grid.Row="1"
+                            Text="All orders of $40 or more qualify for FREE delivery." />
+
+                    <StackLayout Orientation="Horizontal" Grid.ColumnSpan="3" Grid.Row="2"
+                                 Margin="0,32,0,0">
+
+                        <Label Style="{StaticResource cart_total}" Text="Total:" />
+
+                        <Label Style="{StaticResource cart_total_price}"
+                                Text="{Binding TotalPrice, StringFormat='{0:c}'}" />
+
+                    </StackLayout>
+                </Grid>
+            </CollectionView.Footer>
+        </CollectionView>
+</ContentView>

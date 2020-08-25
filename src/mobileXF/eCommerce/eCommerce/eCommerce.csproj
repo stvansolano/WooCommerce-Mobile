@@ -41,6 +41,7 @@
     <Folder Include="Views\SearchScreen\" />
     <Folder Include="Fonts\" />
     <Folder Include="Fonts\Glyphs\" />
+    <Folder Include="Views\ShoppingCart\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Fonts\FontAwesome5BrandsRegular.otf" />
