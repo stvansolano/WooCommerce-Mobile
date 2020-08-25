@@ -11,6 +11,7 @@
 <Application.Resources>
     <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="Styles/Colors.xaml" />                
             <ResourceDictionary Source="Styles/Fonts.xaml" />                
             <ResourceDictionary Source="Styles/Styles.stheiwissen.xaml" />
             <ResourceDictionary Source="Styles/Styles.valentineg8.xaml" />
@@ -30,6 +31,16 @@
             <Setter Property="Command" Value="{Binding GoBackCommand}" />
             <Setter Property="Margin" Value="0,0,5,0" />
             <Setter Property="ImageSource" Value="{StaticResource Icon_Back}" />
+        </Style>
+
+        <Style x:Key="MainActionButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource Color_MainAction}" />
+            <Setter Property="CornerRadius" Value="26" />
+            <Setter Property="HeightRequest" Value="52" />
+            <Setter Property="Padding" Value="12" />
+            <Setter Property="FontFamily" Value="{StaticResource PalanquinBold}" />
+            <Setter Property="TextColor" Value="{StaticResource Color_PrimaryText}" />
+            <Setter Property="FontSize" Value="16" />
         </Style>
 
         <!-- Organized templates -->
