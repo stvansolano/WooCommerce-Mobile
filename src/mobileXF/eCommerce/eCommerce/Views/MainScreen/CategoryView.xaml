@@ -5,10 +5,7 @@
              x:Class="eCommerce.Views.MainScreen.CategoryView"
              x:Name="Parent"
              >
-    <StackLayout Margin="20, 5"
-                 x:Name="grid"
-                 Padding="0,50"
-                 >
+    <StackLayout x:Name="grid">
        <AbsoluteLayout VerticalOptions="FillAndExpand">
             <pancakes:PancakeView HasShadow="True"
                                   x:Name="container"
@@ -18,20 +15,21 @@
                                   />
 
             <pancakes:PancakeView x:Name="imgContainer"
-                                CornerRadius="10">
-                 <Image Source="{Binding Data.image.src}"
-                        x:Name="img"
+                                CornerRadius="10"
+                                Padding="20,0,5,0">
+            <StackLayout x:Name="textContainer" Orientation="Vertical"
+                         HeightRequest="200">
+
+                <Image Source="{Binding Data.image.src}"
+                        x:Name="img" HeightRequest="100"
                         Aspect="AspectFill"
                         />
-
-            </pancakes:PancakeView>
-            <StackLayout x:Name="textContainer">
                 <Label
                     FontSize="Large"
                     LineBreakMode="TailTruncation"
                     TextColor="{DynamicResource mainLabel}"
                     FontFamily="{StaticResource InterBold}"
-                    Margin="0, 20, 0, 0">
+                    Margin="0, 5, 0, 0">
 
                       <Label.FormattedText>
                         <FormattedString>
@@ -43,6 +41,8 @@
                     </Label.FormattedText>
                 </Label>
             </StackLayout>
+        </pancakes:PancakeView>
+
         </AbsoluteLayout>
     </StackLayout>
     
