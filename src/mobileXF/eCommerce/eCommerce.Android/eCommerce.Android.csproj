@@ -86,12 +86,25 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+    <Folder Include="Assets\Fonts\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce\eCommerce.csproj">
       <Project>{C21DD38D-2712-46D0-850D-3B5608FA62C1}</Project>
       <Name>eCommerce</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Fonts\FontAwesome5BrandsRegular.otf" />
+    <AndroidAsset Include="Assets\Fonts\FontAwesome5Regular.otf" />
+    <AndroidAsset Include="Assets\Fonts\FontAwesome5Solid.otf" />
+    <AndroidAsset Include="Assets\Fonts\IcoMoon-Free.ttf" />
+    <AndroidAsset Include="Assets\Fonts\InterBold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\InterLight.ttf" />
+    <AndroidAsset Include="Assets\Fonts\InterMedium.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Palanquin-Bold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Palanquin-Light.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Palanquin-Regular.ttf" />
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
