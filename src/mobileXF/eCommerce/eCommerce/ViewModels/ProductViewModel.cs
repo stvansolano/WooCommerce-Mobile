@@ -6,7 +6,8 @@ namespace eCommerce.ViewModels
 {
 	public class ProductViewModel : ViewModels.NavigationItemViewModel
 	{
-		public ProductViewModel(Product data, INavigationService navigationService) : base(data, navigationService)
+		public ProductViewModel(Product data, INavigationService navigationService)
+			: base(data, navigationService)
 		{
 			ImageUrl = data.images?.FirstOrDefault()?.src;
 		}

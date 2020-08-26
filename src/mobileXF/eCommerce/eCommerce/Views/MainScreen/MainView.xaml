@@ -136,7 +136,8 @@
                    Text="{StaticResource ShoppingCart}"
                    />
 
-            <shopScreen:ShoppingCartView Grid.Row="2" />
+            <shopScreen:ShoppingCartView Grid.Row="2"
+                                         />
 
             <Button Style="{StaticResource MainActionButton}"
                     Command="{Binding ContinueShoppingCommand}"

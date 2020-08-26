@@ -6,15 +6,17 @@
         <Label Text="{Binding Title}" />
         <SearchBar Text="{Binding Criteria}" />
 
-        <Button Text="Search" CornerRadius="10" HorizontalOptions="End" Padding="5"
-                BackgroundColor="Gold" TextColor="Black" Command="{Binding SearchCommand}" />
+        <Button Style="{StaticResource MainActionButton}"
+                Command="{Binding SearchCommand}"
+                Text="Search"
+                Margin="0,20,0,44" />
 
-         <CollectionView x:Name="ProductOverview"
+         <CollectionView x:Name="SearchCollection"
                          ItemsSource="{Binding Results}"
                          VerticalScrollBarVisibility="Never"
                          SelectionMode="Single"
                          ItemTemplate="{DynamicResource DefaultProductTemplate}"
-                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ProductOverview}}"
+                         SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference SearchCollection}}"
                          SelectionChangedCommand="{Binding SelectedItemCommand}">
 
             <CollectionView.ItemsLayout>

@@ -14,11 +14,14 @@ using Xamarin.Forms;
 using eCommerce.Views.SearchScreen;
 using Prism.Navigation;
 using eCommerce.Views.ShoppingCart;
+using Prism.Mvvm;
 
 namespace eCommerce
 {
 	public partial class App
 	{
+		public IContainerRegistry Registry { get; private set; }
+
 		static App()
 		{
 			// ./ngrok 0.0.0.0:7071
@@ -28,14 +31,18 @@ namespace eCommerce
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
+			Registry = containerRegistry;
+
 			containerRegistry.RegisterInstance(Container);
-			containerRegistry.Register<INavigationService, PageNavigationService>();
-			containerRegistry.RegisterServices();
+			containerRegistry.RegisterServices(Container, NavigationService);
 			containerRegistry.RegisterForNavigation<NavigationPage>();
 
 			// ProductListing
 			containerRegistry.RegisterForNavigation<ProductListingPage, ProductListingViewModel>("ProductListing");
 			containerRegistry.RegisterForNavigation<ProductDetailPage, ProductDetailViewModel>("ProductDetail");
+
+			//ViewModelLocationProvider.Register<ShoppingCartView, ShoppingCartViewModel>();
+			//ViewModelLocationProvider.Register<SearchView, SearchViewModel>();
 
 			containerRegistry.RegisterForNavigation<MainPage, MainViewModel>();
 		}
@@ -48,10 +55,11 @@ namespace eCommerce
 
 				var result = await NavigationService.NavigateAsync("NavigationPage/MainPage");
 
-				if (!result.Success)
+				if (result.Success)
 				{
-					SetMainPageFromException(result.Exception);
+					return;
 				}
+				SetMainPageFromException(result.Exception);
 			}
 			catch (Exception ex)
 			{
@@ -90,8 +98,12 @@ namespace eCommerce
 
 	public static class AppExtensions
 	{
-		public static void RegisterServices(this IContainerRegistry containerRegistry)
+		public static void RegisterServices(this IContainerRegistry containerRegistry,
+											IContainerProvider provider,
+											INavigationService navigation)
 		{
+			containerRegistry.RegisterSingleton<IShoppingCartService, ShoppingCartService>();
+
 			var api = new WooComerceApi(websiteRoot: eCommerce.Helpers.Secrets.Website,
 													 client: eCommerce.Helpers.Secrets.ClientId,
 													 secret: eCommerce.Helpers.Secrets.ClientSecret);
@@ -111,12 +123,6 @@ namespace eCommerce
 
 			// Categories
 			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, ProductCategoryService>();
-
-			// Search
-			containerRegistry.RegisterSingleton<SearchViewModel>();
-
-			// Shopping Cart
-			containerRegistry.RegisterSingleton<ShoppingCartViewModel>();
 		}
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using System.Windows.Input;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
 
 namespace eCommerce.ViewModels
@@ -13,6 +12,9 @@ namespace eCommerce.ViewModels
 
 			Navigation = navigationService;
 
+			GoBackCommand = new DelegateCommand(async () =>
+				await Navigation.GoBackAsync());
+
 			GoToDetailCommand = new DelegateCommand(async () => {
 
 				var navigationParameters = new NavigationParameters();
@@ -24,5 +26,6 @@ namespace eCommerce.ViewModels
 
 		public object Data { get; }
 		public ICommand GoToDetailCommand { get; }
+		public ICommand GoBackCommand { get; set; }
 	}
 }

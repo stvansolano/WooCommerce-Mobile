@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace eCommerce.Views
@@ -22,7 +21,7 @@ namespace eCommerce.Views
             _height = (Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Height / Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Density) - 80;
         }
 
-        async Task SwipeGestureRecognizer_SwipedUp()
+		async Task SwipeGestureRecognizer_SwipedUp()
         {
             if (_isCartVisible)
                 return;

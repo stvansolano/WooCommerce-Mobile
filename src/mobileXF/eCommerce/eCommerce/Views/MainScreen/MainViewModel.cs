@@ -9,6 +9,7 @@ using eCommerce.Views.MainScreen;
 using eCommerce.Views.SearchScreen;
 using eCommerce.Views.ShoppingCart;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Ioc;
 using Prism.Navigation;
 
@@ -43,14 +44,17 @@ namespace eCommerce
 		public SearchViewModel SearchViewModel { get; }
 		public ShoppingCartViewModel ShoppingCart { get; }
 
-		public MainViewModel(IContainerProvider dependencyProvider, INavigationService navigationService)
+		public MainViewModel(IContainerProvider dependencyProvider,
+							 INavigationService navigationService,
+							 IEventAggregator eventAggregator)
 		{
 			NavigationService = navigationService;
 
 			CategoryService = dependencyProvider.Resolve<IHttpFactory<ProductCategory>>();
 			TagsService = dependencyProvider.Resolve<IHttpFactory<ProductTag>>();
-			SearchViewModel = dependencyProvider.Resolve<SearchViewModel>();
-			ShoppingCart = dependencyProvider.Resolve<ShoppingCartViewModel>();
+
+			ShoppingCart = new ShoppingCartViewModel(dependencyProvider, eventAggregator, navigationService);
+			SearchViewModel = new SearchViewModel(dependencyProvider, navigationService, dependencyProvider.Resolve<IShoppingCartService>());
 
 			RefreshCommand = new DelegateCommand(async () => await RefreshDataAsync());
 

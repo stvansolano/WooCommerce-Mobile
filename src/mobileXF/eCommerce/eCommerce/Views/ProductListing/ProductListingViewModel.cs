@@ -21,7 +21,7 @@ namespace eCommerce.ViewModels
 		public ICommand SelectedItemCommand { get; set; }
 
 		public ObservableCollection<ProductViewModel> Products { get; set; } = new ObservableCollection<ProductViewModel>();
-		public ShoppingCartViewModel ShoppingCart { get; }
+		public IShoppingCartService ShoppingCart { get; }
 
 		private object _parent;
 		public object Parent
@@ -33,23 +33,25 @@ namespace eCommerce.ViewModels
 				RaisePropertyChanged(nameof(Parent));
 			}
 		}
-		public ProductListingViewModel(IContainerProvider dependencyProvider, INavigationService navigationService)
+
+		public ProductListingViewModel(IContainerProvider dependencyProvider,
+									  INavigationService navigationervice)
 		{
-			Navigation = navigationService;
+			Navigation = navigationervice;
 			ProductService = dependencyProvider.Resolve<IProductService>();
-			ShoppingCart = dependencyProvider.Resolve<ShoppingCartViewModel>();
+			ShoppingCart = dependencyProvider.Resolve<IShoppingCartService>();
 
 			GoBackCommand = new DelegateCommand(async() => await Navigation.GoBackAsync());
 
 			SelectedItemCommand = new DelegateCommand<ProductViewModel>(
-				async selectedItem =>
-			{
-				var parameters = new NavigationParameters();
-				parameters.Add("Product", selectedItem);
-				parameters.Add("QuantityInCart", GetQuantityInCart(selectedItem));
+							   async selectedItem =>
+							   {
+								   var parameters = new NavigationParameters();
+								   parameters.Add("Product", selectedItem);
+								   parameters.Add("QuantityInCart", GetQuantityInCart(selectedItem));
 
-				await Navigation.NavigateAsync("ProductDetail", parameters);
-			});
+								   await Navigation.NavigateAsync("ProductDetail", parameters);
+							   });
 		}
 
 		private int GetQuantityInCart(ProductViewModel selectedItem)
