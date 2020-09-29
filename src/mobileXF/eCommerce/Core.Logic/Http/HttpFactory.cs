@@ -47,20 +47,4 @@ namespace Core.Logic.Http
             return string.Empty;
         }
     }
-
-    /*
-    public class RefitFactory : IHttpFactory
-    {
-        public string BaseUrl { get; set; }
-
-		public RefitFactory()
-		{
-            _instance = new Lazy<IDomainApi>(
-                () => RestService.For<IDomainApi>(BaseUrl)
-            );
-        }
-
-        private Lazy<IDomainApi> _instance;
-	}*/
-
 }

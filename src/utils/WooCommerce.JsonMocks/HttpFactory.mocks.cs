@@ -1,6 +1,8 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using Core.Logic.Http;
+using Newtonsoft.Json;
 
 namespace WooCommerce.Mocks
 {
@@ -18,6 +20,27 @@ namespace WooCommerce.Mocks
 
         public override Task<HttpResponse<T[]>> GetAsync(string endpointName = null, HttpRequest request = null)
             => base.GetAsync(endpointName ?? _defaultEndpoint, request);
+
+        public async Task<HttpResponse<SubT[]>> GetSubTypeAsync<SubT>(string endpointName = null, HttpRequest request = null)
+            where SubT : class
+        {
+			try
+            {
+                using (var client = GetClient(GetUrl(endpointName)))
+                {
+                    var response = await client.GetStringAsync(string.Empty).ConfigureAwait(false);
+                    return new HttpResponse<SubT[]>(JsonConvert.DeserializeObject<SubT[]>(response));
+                }
+            }
+            catch (Exception ex)
+            {
+                //if (!string.IsNullOrEmpty(apex.Response))
+                //{
+                //    apex.ObjectResponse = JsonConvert.DeserializeObject<CSResponse>(apex.Response);
+                //}
+                return new HttpResponse<SubT[]>(Array.Empty<SubT>(), HttpStatusCode.InternalServerError, ex);
+            }
+        }
 
         protected override string GetUrl(string endpointName = null)
             => MockUtils.GetMockerverUrl(endpointName ?? _defaultEndpoint);

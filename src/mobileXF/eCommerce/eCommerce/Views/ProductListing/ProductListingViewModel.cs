@@ -85,9 +85,6 @@ namespace eCommerce.ViewModels
 
 			foreach (Product item in storeResult.Result)
 			{
-#if USE_MOCKS
-				Decorate(item);
-#endif
 				if (parent is ProductCategory category && item.categories != null)
 				{
 					if (item.categories.Any(c => c.id == category.id))
@@ -114,21 +111,5 @@ namespace eCommerce.ViewModels
 			}
 			return ProductService.GetAsync();
 		}
-
-		#if USE_MOCKS
-
-		private void Decorate(Product item)
-		{
-			if (item.images == null || item.images.Any() == false)
-			{
-				item.images = new System.Collections.Generic.List<ProductImage>();
-				item.images.Add(new ProductImage
-				{
-					src = "https://static.ah.nl/image-optimization/static/product/AHI_43545239353939383432_1_LowRes_JPG.JPG?options=399,q85"
-				});
-			}
-		}
-
-		#endif
 	}
 }

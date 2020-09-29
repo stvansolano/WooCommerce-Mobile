@@ -10,7 +10,7 @@ namespace WooCommerce.Mocks
 	{
 		public async Task<HttpResponse<Product[]>> GetByCategoryId(int categoryId)
 		{
-			var mockedCall = await base.GetAsync();
+			var mockedCall = await base.GetAsync($"/products?categoryId={categoryId}");
 
 			return mockedCall;
 		}
@@ -19,12 +19,14 @@ namespace WooCommerce.Mocks
 		{
 			await Task.Delay(500);
 
-			return new HttpResponse<Variation[]>(new Variation[0], HttpStatusCode.OK);
+			//return new HttpResponse<Variation[]>(new Variation[0], HttpStatusCode.OK);
+			var mockedCall = await base.GetSubTypeAsync<Variation>($"/products/{productId}/variations");
+			return mockedCall;
 		}
 
 		public async Task<HttpResponse<Product[]>> Search(string criteria)
 		{
-			var mockedCall = await base.GetAsync();
+			var mockedCall = await base.GetAsync($"/products?search={criteria}");
 
 			return mockedCall;
 		}

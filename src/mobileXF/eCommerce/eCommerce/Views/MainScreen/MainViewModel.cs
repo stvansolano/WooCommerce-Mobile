@@ -59,7 +59,7 @@ namespace eCommerce
 			RefreshCommand = new DelegateCommand(async () => await RefreshDataAsync());
 
 			TabItems.Add(AllItems = new AllItemsTab { Selected = true });
-			TabItems.Add(AllTags = new AllTagsTab());
+			//TabItems.Add(AllTags = new AllTagsTab());
 			//TabItems.Add(AllPopular = new PopularTab());
 			TabItems.Add(Search = new SearchTab());
 
@@ -69,11 +69,15 @@ namespace eCommerce
 		private async Task RefreshDataAsync()
 		{
 			await RefreshCategories();
-			await RefreshTags();
+			//await RefreshTags();
 		}
 
-		private async Task RefreshCategories()
+		private async Task RefreshCategories(bool? forceRefresh = false)
 		{
+			if (AllItems.Items.Any() && !forceRefresh.GetValueOrDefault(false))
+			{
+				return;
+			}
 			var categories = await CategoryService.GetAsync("/products/categories");
 			Console.WriteLine($"Categories: {(categories?.Result ?? new ProductCategory[0]).Length}");
 
@@ -83,6 +87,11 @@ namespace eCommerce
 			{
 				var navigableItem = new NavigationItemViewModel(item, NavigationService);
 
+				if (item.image == null)
+				{
+					item.image = new WooCommerceNET.WooCommerce.v2.ProductCategoryImage();
+					item.image.src = "https://my-woo-store.azurewebsites.net/wp-content/uploads/woocommerce-placeholder-324x324.png";
+				}
 				AllItems.Items.Add(navigableItem);
 			}
 		}
