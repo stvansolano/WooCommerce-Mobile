@@ -25,4 +25,23 @@
 			NavigationPage.SetHasNavigationBar(this, false);
 		}
 	}
+
+	/*
+	* Tabs 
+		* Categories+Products listing
+		* Product variations (API)
+	* Photos (ProductDetail)
+	* Build.Tools (tokens)
+	+ Search
+		* Basic UI
+		- Make it a module
+	* UI polish (icons, font)
+	+ Shopping Cart (Module) 
+		* EventAggregator
+		-> Continue on website
+	Others:
+	- Failed connection
+	- Category images
+	- WhatsApp integration
+	*/
 }

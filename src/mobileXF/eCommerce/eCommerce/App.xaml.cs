@@ -5,7 +5,6 @@ using Core.Logic;
 using Core.Logic.Http;
 using Core.Logic.Services;
 using eCommerce.ViewModels;
-using WooCommerce.Mocks;
 
 using Prism.Ioc;
 
@@ -15,19 +14,14 @@ using eCommerce.Views.SearchScreen;
 using Prism.Navigation;
 using eCommerce.Views.ShoppingCart;
 using Prism.Mvvm;
+using WooCommerce.Mocks;
 
 namespace eCommerce
 {
 	public partial class App
 	{
 		public IContainerRegistry Registry { get; private set; }
-
-		static App()
-		{
-			// ./ngrok 0.0.0.0:7071
-			// http://localhost:7071/api/MockServer?url=/wp-json/wc/v3/products
-			WooCommerce.Mocks.MockUtils.BaseUrl = "https://c09cda9c6fca.ngrok.io"; // "without /"
-		}
+		private const string _mockBaseUrl = ""; // "without /"
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
@@ -110,19 +104,19 @@ namespace eCommerce
 
 			containerRegistry.RegisterInstance(api);
 
-			var productService = new MockProductService();
+			var productService = new ProductService(api);
 
 			// Products
 			containerRegistry.RegisterInstance<IHttpFactory<Product>>(productService);
 			containerRegistry.RegisterInstance<IProductService>(productService);
 
 			// Tags
-			containerRegistry.RegisterSingleton<IHttpFactory<ProductTag>, MockHttpFactory<ProductTag>>();
+			containerRegistry.RegisterSingleton<IHttpFactory<ProductTag>, ProductTagService>();
 			//new MockHttpFactory<ProductTag>("/products/tags")
 			//);
 
 			// Categories
-			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, MockHttpFactory<ProductCategory>>();
+			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, ProductCategoryService>();
 		}
 	}
 }

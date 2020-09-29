@@ -21,8 +21,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\mobileXF\eCommerce\Core.Logic\Core.Logic.csproj" />
-    <ProjectReference Include="..\WooCommerce.JsonMocks\WooCommerce.Mocks.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
   </ItemGroup>
 </Project>

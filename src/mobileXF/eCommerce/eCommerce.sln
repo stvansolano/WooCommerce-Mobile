@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockServer", "..\..\utils\d
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Logic", "Core.Logic\Core.Logic.csproj", "{8B3C4C06-DB02-42A9-A320-483CE10D6D1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WooCommerce.Mocks", "..\..\utils\WooCommerce.JsonMocks\WooCommerce.Mocks.csproj", "{BBA73BC8-E8ED-42E8-B884-AAF26F2BB131}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,18 +89,6 @@ Global
 		{8B3C4C06-DB02-42A9-A320-483CE10D6D1F}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{8B3C4C06-DB02-42A9-A320-483CE10D6D1F}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{8B3C4C06-DB02-42A9-A320-483CE10D6D1F}.Release|iPhone.Build.0 = Release|Any CPU
-		{BBA73BC8-E8ED-42E8-B884-AAF26F2BB131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBA73BC8-E8ED-42E8-B884-AAF26F2BB131}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBA73BC8-E8ED-42E8-B884-AAF26F2BB131}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBA73BC8-E8ED-42E8-B884-AAF26F2BB131}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BBA73BC8-E8ED-42E8-B884-AAF26F2BB131}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{BBA73BC8-E8ED-42E8-B884-AAF26F2BB131}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{BBA73BC8-E8ED-42E8-B884-AAF26F2BB131}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{BBA73BC8-E8ED-42E8-B884-AAF26F2BB131}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{BBA73BC8-E8ED-42E8-B884-AAF26F2BB131}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{BBA73BC8-E8ED-42E8-B884-AAF26F2BB131}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{BBA73BC8-E8ED-42E8-B884-AAF26F2BB131}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{BBA73BC8-E8ED-42E8-B884-AAF26F2BB131}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C21DD38D-2712-46D0-850D-3B5608FA62C1} = {1C2DDBA2-B62C-42CA-AC9B-32BBDEC9262D}
@@ -111,6 +97,5 @@ Global
 		{2A3301F3-EE4E-4FC7-8852-672D99C1D007} = {2D051614-45F7-4CDE-92CA-B945BA3CB9CF}
 		{02DA9B3D-30BD-4A64-A410-9F3F660EF10E} = {2A3301F3-EE4E-4FC7-8852-672D99C1D007}
 		{8B3C4C06-DB02-42A9-A320-483CE10D6D1F} = {513595B9-0702-46CC-98C8-9DB6B9B95E67}
-		{BBA73BC8-E8ED-42E8-B884-AAF26F2BB131} = {2A3301F3-EE4E-4FC7-8852-672D99C1D007}
 	EndGlobalSection
 EndGlobal

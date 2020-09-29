@@ -19,9 +19,9 @@ namespace WooCommerce.Mocks
 		{
 			await Task.Delay(500);
 
-			//return new HttpResponse<Variation[]>(new Variation[0], HttpStatusCode.OK);
-			var mockedCall = await base.GetSubTypeAsync<Variation>($"/products/{productId}/variations");
-			return mockedCall;
+			return new HttpResponse<Variation[]>(new Variation[0], HttpStatusCode.OK);
+			//var mockedCall = await base.GetSubTypeAsync<Variation>($"/products/{productId}/variations");
+			//return mockedCall;
 		}
 
 		public async Task<HttpResponse<Product[]>> Search(string criteria)

@@ -69,7 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Logic\Core.Logic.csproj" />
-    <ProjectReference Include="..\..\..\utils\WooCommerce.JsonMocks\WooCommerce.Mocks.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Fonts\FontAwesome5BrandsRegular.otf" />
