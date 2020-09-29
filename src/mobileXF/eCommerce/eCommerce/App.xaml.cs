@@ -21,7 +21,13 @@ namespace eCommerce
 	public partial class App
 	{
 		public IContainerRegistry Registry { get; private set; }
-		private const string _mockBaseUrl = ""; // "without /"
+
+		static App()
+		{
+			// ./ngrok 0.0.0.0:7071
+			// http://localhost:7071/api/MockServer?url=/wp-json/wc/v3/products
+			WooCommerce.Mocks.MockUtils.BaseUrl = "https://c09cda9c6fca.ngrok.io"; // "without /"
+		}
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
@@ -104,19 +110,19 @@ namespace eCommerce
 
 			containerRegistry.RegisterInstance(api);
 
-			var productService = new ProductService(api);
+			var productService = new MockProductService();
 
 			// Products
 			containerRegistry.RegisterInstance<IHttpFactory<Product>>(productService);
 			containerRegistry.RegisterInstance<IProductService>(productService);
 
 			// Tags
-			containerRegistry.RegisterSingleton<IHttpFactory<ProductTag>, ProductTagService>();
+			containerRegistry.RegisterSingleton<IHttpFactory<ProductTag>, MockHttpFactory<ProductTag>>();
 			//new MockHttpFactory<ProductTag>("/products/tags")
 			//);
 
 			// Categories
-			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, ProductCategoryService>();
+			containerRegistry.RegisterSingleton<IHttpFactory<ProductCategory>, MockHttpFactory<ProductCategory>>();
 		}
 	}
 }

@@ -47,7 +47,7 @@ namespace MockServer
 			return response;
 		}
 
-		private static ProductCategory[] _categories = JsonConvert.DeserializeObject<ProductCategory[]>(@"
+		private static ProductCategory[] _categories = JsonConvert.DeserializeObject<ProductCategory[]>(@"[
             {
 				""id"": 15,
 				""name"": ""Albums"",
@@ -84,7 +84,7 @@ namespace MockServer
 				  ""src"": ""https://static.ah.nl/image-optimization/static/product/AHI_43545239353939383432_1_LowRes_JPG.JPG?options=399,q85"",
 				  ""name"": """",
 				  ""alt"": """"
-				}");
+				}}]");
 	}
 
 	public class CustomStatusCodeResult : ObjectResult
