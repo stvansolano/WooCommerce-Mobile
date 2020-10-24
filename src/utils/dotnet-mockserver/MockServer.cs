@@ -25,6 +25,7 @@ namespace MockServer
 
 			string url = req.Query["url"];
 
+			url = url ?? string.Empty;
 			string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
 			dynamic data = JsonConvert.DeserializeObject(requestBody);
 			//name = name ?? data?.name;
