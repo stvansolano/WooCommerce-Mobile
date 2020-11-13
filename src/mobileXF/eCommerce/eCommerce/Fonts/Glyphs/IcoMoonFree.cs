@@ -7,6 +7,6 @@ namespace eCommerce.Fonts
 		public const string ArrowLeft = "\uea38";
 		public const string Heart = "\ue9da";
 		public const string AngleLeft = "\uea40";
-
+		public const string Menu = "\uea78";
 	}
 }

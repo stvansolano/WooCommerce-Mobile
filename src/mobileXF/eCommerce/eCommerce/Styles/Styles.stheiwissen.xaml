@@ -236,14 +236,6 @@ Link: https://github.com/sthewissen/FocusOnXamarin/blob/master/FocusOnXamarin/Ap
         <Setter Property="WidthRequest" Value="300"/>
     </Style>
 
-    <Style x:Key="menu_button" TargetType="Button">
-        <Setter Property="FontFamily" Value="{StaticResource IcoMoonFree}"/>
-        <Setter Property="VerticalOptions" Value="Center"/>
-        <Setter Property="BackgroundColor" Value="Transparent"/>
-        <Setter Property="HeightRequest" Value="40"/>
-        <Setter Property="WidthRequest" Value="40"/>
-    </Style>
-
     <Style x:Key="quantity_picker_value" TargetType="Label">
         <Setter Property="FontFamily" Value="{StaticResource PalanquinBold}"/>
         <Setter Property="FontSize" Value="20"/>

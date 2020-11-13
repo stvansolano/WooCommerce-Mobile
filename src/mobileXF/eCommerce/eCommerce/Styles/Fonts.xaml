@@ -52,7 +52,8 @@
         <On Platform="iOS" 
             Value="Fonts/FontAwesome5Free-Regular" /> 
     </OnPlatform>
-        <OnPlatform x:TypeArguments="x:String" 
+    
+    <OnPlatform x:TypeArguments="x:String" 
                     x:Key="InterMedium">
         <On Platform="Android" 
             Value="Fonts/InterMedium.ttf#Medium" /> 
@@ -69,14 +70,13 @@
     </OnPlatform>
 
     <OnPlatform x:TypeArguments="x:String" 
-                x:Key="InterLight"> 
+                x:Key="InterLight">
         <On Platform="Android" 
-            Value="Fonts/InterLight.ttf#Light" /> 
+            Value="Fonts/InterLight.ttf#Light" />
         <On Platform="iOS" 
-            Value="Fonts/Inter-Light" /> 
+            Value="Fonts/Inter-Light" />
     </OnPlatform>
 
-    
     <Style x:Key="Header" TargetType="Label"
             BaseResourceKey="product_detail_name">
         <Setter Property="FontFamily" Value="{StaticResource PalanquinBold}"/>

@@ -44,7 +44,7 @@
                        Text="{StaticResource MainTitle}"
                        VerticalOptions="Center"
                        />
-                <Button Grid.Row="0" x:Name="MenuBarIcon" Text="equalizer2" Style="{StaticResource menu_button}" HorizontalOptions="End" />
+                <Button Grid.Row="0" x:Name="MenuBarIcon" Style="{StaticResource MenuButton}" HorizontalOptions="End" />
 
                 <Grid Grid.Row="1">
 

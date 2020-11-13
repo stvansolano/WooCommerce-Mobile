@@ -5,5 +5,7 @@ namespace eCommerce.Fonts
 	static class FontAwesome5Solid
 	{
 		public const string AngleLeft = "\uf104";
+		public const string Plus = "\uf067";
+		public const string Minus = "\uf068";
 	}
 }

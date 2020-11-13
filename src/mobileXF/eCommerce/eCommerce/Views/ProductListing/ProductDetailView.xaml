@@ -65,7 +65,8 @@ Credits to: @sthewissen
                     <Frame Style="{StaticResource quantity_picker_container}" >
                         <Grid VerticalOptions="Start">
                             <Button Style="{StaticResource quantity_picker_button}"
-                                    Grid.Column="0" Text="minus"
+                                    Grid.Column="0" BackgroundColor="Transparent"
+                                    ImageSource="{DynamicResource Icon_Minus}"
                                     Command="{Binding DecreaseQuantityCommand}"
                                     />
 
@@ -74,8 +75,8 @@ Credits to: @sthewissen
 
                             <Button Style="{StaticResource quantity_picker_button}"
                                     Command="{Binding IncreaseQuantityCommand}"
-                                    Grid.Column="2"
-                                    Text="plus"
+                                    Grid.Column="2" BackgroundColor="Transparent"               
+                                    ImageSource="{DynamicResource Icon_Plus}"
                                     />
                         </Grid>
                     </Frame>

@@ -16,5 +16,23 @@
                          Glyph="{x:Static fonts:IcoMoonFree.Heart}"
                          Size="22"
                          Color="Red" />
-    
+        
+        <FontImageSource x:Key="Icon_Menu" 
+                         FontFamily="{DynamicResource IcoMoonFree}"
+                         Glyph="{x:Static fonts:IcoMoonFree.Menu}"
+                         Size="22"
+                         Color="Black" />
+
+        <FontImageSource x:Key="Icon_Minus"
+                         FontFamily="{DynamicResource FontAwesomeSolid}"
+                         Glyph="{x:Static fonts:FontAwesome5Solid.Minus}"
+                         Size="22"
+                         Color="Black" />
+
+        <FontImageSource x:Key="Icon_Plus"
+                     FontFamily="{DynamicResource FontAwesomeSolid}"
+                     Glyph="{x:Static fonts:FontAwesome5Solid.Plus}"
+                     Size="22"
+                     Color="Black" />
+
 </ResourceDictionary>

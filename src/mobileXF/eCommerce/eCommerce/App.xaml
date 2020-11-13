@@ -23,16 +23,6 @@
         <x:String x:Key="MainTitle">My shop</x:String>
         <x:String x:Key="ShoppingCart">Shopping cart</x:String>
 
-
-        <Style x:Key="BackButton"
-                TargetType="Button"
-                BaseResourceKey="menu_button">
-
-            <Setter Property="Command" Value="{Binding GoBackCommand}" />
-            <Setter Property="Margin" Value="0,0,5,0" />
-            <Setter Property="ImageSource" Value="{StaticResource Icon_Back}" />
-        </Style>
-
         <Style x:Key="MainActionButton" TargetType="Button">
             <Setter Property="BackgroundColor" Value="{StaticResource Color_MainAction}" />
             <Setter Property="CornerRadius" Value="26" />
@@ -71,6 +61,26 @@
                 </pancakes:PancakeView>
             </StackLayout>
         </DataTemplate>
-    </ResourceDictionary>
+
+
+        <Style x:Key="MenuButton" TargetType="Button">
+            <Setter Property="FontFamily" Value="{StaticResource IcoMoonFree}"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="ImageSource" Value="{DynamicResource Icon_Menu}" />
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="WidthRequest" Value="40"/>
+        </Style>
+
+
+        <Style x:Key="BackButton"
+            TargetType="Button"
+            BaseResourceKey="MenuButton">
+
+            <Setter Property="Command" Value="{Binding GoBackCommand}" />
+            <Setter Property="Margin" Value="0,0,5,0" />
+            <Setter Property="ImageSource" Value="{StaticResource Icon_Back}" />
+        </Style>
+        </ResourceDictionary>
 </Application.Resources>
 </prism:PrismApplication>
