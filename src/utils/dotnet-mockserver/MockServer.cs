@@ -14,6 +14,8 @@ using System.Collections.Generic;
 namespace MockServer
 {
 	// ./ngrok http 0.0.0.0:7071
+	// Windows: func start --csharp
+	// Windows start C:\dev\ngrok\ngrok.exe http 0.0.0.0:7071
 	public static class MockServer
 	{
 		[FunctionName("MockServer")]
