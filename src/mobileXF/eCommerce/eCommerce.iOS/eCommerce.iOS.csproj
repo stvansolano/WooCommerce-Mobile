@@ -136,4 +136,16 @@
       <Name>eCommerce</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Fonts\InterMedium.ttf" />
+    <BundleResource Include="Resources\Fonts\FontAwesome5BrandsRegular.otf" />
+    <BundleResource Include="Resources\Fonts\InterLight.ttf" />
+    <BundleResource Include="Resources\Fonts\FontAwesome5Solid.otf" />
+    <BundleResource Include="Resources\Fonts\Palanquin-Regular.ttf" />
+    <BundleResource Include="Resources\Fonts\FontAwesome5Regular.otf" />
+    <BundleResource Include="Resources\Fonts\Palanquin-Bold.ttf" />
+    <BundleResource Include="Resources\Fonts\Palanquin-Light.ttf" />
+    <BundleResource Include="Resources\Fonts\IcoMoon-Free.ttf" />
+    <BundleResource Include="Resources\Fonts\InterBold.ttf" />
+  </ItemGroup>
 </Project>
