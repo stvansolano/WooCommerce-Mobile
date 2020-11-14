@@ -44,7 +44,9 @@
                        Text="{StaticResource MainTitle}"
                        VerticalOptions="Center"
                        />
-                <Button Grid.Row="0" x:Name="MenuBarIcon" Style="{StaticResource MenuButton}" HorizontalOptions="End" />
+                <Button Grid.Row="0" x:Name="MenuBarIcon" Style="{StaticResource MenuButton}"
+                        Command="{Binding RefreshCommand}"
+                        HorizontalOptions="End" />
 
                 <Grid Grid.Row="1">
 

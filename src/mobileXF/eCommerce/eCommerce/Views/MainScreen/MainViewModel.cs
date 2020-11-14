@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -56,7 +57,7 @@ namespace eCommerce
 			ShoppingCart = new ShoppingCartViewModel(dependencyProvider, eventAggregator, navigationService);
 			SearchViewModel = new SearchViewModel(dependencyProvider, navigationService, dependencyProvider.Resolve<IShoppingCartService>());
 
-			RefreshCommand = new DelegateCommand(async () => await RefreshDataAsync());
+			RefreshCommand = new DelegateCommand(async () => await RefreshDataAsync(forceRefresh: true));
 
 			TabItems.Add(AllItems = new AllItemsTab { Selected = true });
 			//TabItems.Add(AllTags = new AllTagsTab());
@@ -66,9 +67,9 @@ namespace eCommerce
 			TabItems.OfType<SearchTab>().FirstOrDefault().Items?.Add(this.SearchViewModel);
 		}
 
-		private async Task RefreshDataAsync()
+		private async Task RefreshDataAsync(bool? forceRefresh = false)
 		{
-			await RefreshCategories();
+			await RefreshCategories(forceRefresh);
 			//await RefreshTags();
 		}
 
@@ -78,22 +79,33 @@ namespace eCommerce
 			{
 				return;
 			}
-			var categories = await CategoryService.GetAsync("/products/categories");
-			Console.WriteLine($"Categories: {(categories?.Result ?? new ProductCategory[0]).Length}");
+            try
+            {
+				var categories = await CategoryService.GetAsync("/products/categories");
+				Console.WriteLine($"Categories: {(categories?.Result ?? new ProductCategory[0]).Length}");
 
-			AllItems.Items.Clear();
+				AllItems.Items.Clear();
 
-			foreach (var item in categories.Result)
-			{
-				var navigableItem = new NavigationItemViewModel(item, NavigationService);
-
-				if (item.image == null)
+				foreach (var item in categories.Result)
 				{
-					item.image = new WooCommerceNET.WooCommerce.v2.ProductCategoryImage();
-					item.image.src = "https://my-woo-store.azurewebsites.net/wp-content/uploads/woocommerce-placeholder-324x324.png";
+					var navigableItem = new NavigationItemViewModel(item, NavigationService);
+
+					if (item.image == null)
+					{
+						item.image = new WooCommerceNET.WooCommerce.v2.ProductCategoryImage();
+						item.image.src = "https://my-woo-store.azurewebsites.net/wp-content/uploads/woocommerce-placeholder-324x324.png";
+					}
+					AllItems.Items.Add(navigableItem);
 				}
-				AllItems.Items.Add(navigableItem);
 			}
+			catch (System.Net.WebException ex) 
+			{
+				Debug.WriteLine($"{ex.Message} - Unable to connect: {CategoryService.BaseUrl}");
+			}
+			catch (Exception ex)
+            {
+				Debug.WriteLine(ex.Message);
+            }
 		}
 
 		private async Task RefreshTags()

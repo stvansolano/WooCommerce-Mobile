@@ -23,10 +23,6 @@ namespace Core.Logic.Http
             }
             catch (Exception ex)
             {
-                //if (!string.IsNullOrEmpty(apex.Response))
-                //{
-                //    apex.ObjectResponse = JsonConvert.DeserializeObject<CSResponse>(apex.Response);
-                //}
                 return new HttpResponse<T[]>(Array.Empty<T>(), HttpStatusCode.InternalServerError, ex);
             }
         }

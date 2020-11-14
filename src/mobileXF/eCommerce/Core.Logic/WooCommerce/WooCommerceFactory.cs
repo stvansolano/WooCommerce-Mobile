@@ -8,6 +8,7 @@ namespace Core.Logic.Services
 	{
 		protected WooCommerceFactory(WooComerceApi apiInstance)
 		{
+			BaseUrl = apiInstance.Endpoint;
 			ApiInstance = apiInstance;
 		}
 
